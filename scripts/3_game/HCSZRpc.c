@@ -1,0 +1,4 @@
+enum HCSZRpc
+{
+	HCSZCONFIG
+}
