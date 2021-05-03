@@ -12,7 +12,7 @@ static void SpawnAnimal(vector pos, int lifetime)
         anim.SetLifetime(lifetime);
 }
 
-static void SpawnItem(vector pos, int lifetime, float health)
+static ItemBase SpawnItem(string item_name, vector pos, int lifetime, float health)
 {
     // TODO: Add function to grab item list and attachments
     // TODO: Check if (Main Item && Attachments) -- NEW FUNCTION START
@@ -21,8 +21,31 @@ static void SpawnItem(vector pos, int lifetime, float health)
     // TODO: Check if Item exists
     // TODO: Loop iter Attachments exists -- NEW FUNCTION END
     // TODO: Attach all attachments and trigger Item spawn
-    ItemBase main_item = ItemBase.Cast(GetGame().CreateObject("M4A1", pos, false, true));
-    Print("[HCSZ] Item Spawned: '" + "M4A1" + "'" + "With Health: '" + health + "'");
+    ItemBase main_item = ItemBase.Cast(GetGame().CreateObject(item_name, pos, false, true));
+    Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Health: '" + health + "'");
+    return main_item;
+}
+
+static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool rand_health)
+{
+    bool battery_required = false;
+    for (int attachment_index = 0; attachment_index < attachments.Count(); attachment_index++)
+    {
+        // TODO: Check static list of items that require 9V/other attachments and logic
+        for (int batteries_req = 0; batteries_req < BatteryNeededTypes().Count(); batteries_req++)
+        {
+            if (attachments.Get(attachment_index) == BatteryNeededTypes().Get(batteries_req))
+            {
+                battery_required = true;
+                Print("[HCSZ] Attachment Spawning WITH BATTERY: " + attachments.Get(attachment_index));
+                item.GetInventory().CreateAttachment(attachments.Get(attachment_index)).GetInventory().CreateAttachment("Battery9V");
+                Print("[HCSZ] Successfully attached battery+attachment to : " + item);
+                break;
+            }
+        }
+        item.GetInventory().CreateAttachment(attachments.Get(attachment_index));
+        Print("[HCSZ] Attachment Spawned: " + attachments.Get(attachment_index) + " on Item: " + item);
+    }
 }
 
 static vector GetRandomSpawnPosition(vector centerpoint, int minDistFromHeli, int maxDistFromHeli)
@@ -56,4 +79,9 @@ static TStringArray ZombieTypes()
 static TStringArray AnimalTypes()
 {
     return {"Animal_CanisLupus_Grey", "Animal_CanisLupus_White"};
+}
+
+static TStringArray BatteryNeededTypes()
+{
+    return {"M4_T3NRDSOptic", "PersonalRadio", "UniversalFlashlight"};
 }

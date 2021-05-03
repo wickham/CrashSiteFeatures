@@ -4,7 +4,7 @@ modded class DayZGame
 
     void SetHCSZConfig(HCSZConfig config)
     {
-		m_HCSZConfig = config;
+    m_HCSZConfig = config;
     }
 
     HCSZConfig GetHCSZConfig()
