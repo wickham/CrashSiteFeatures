@@ -31,28 +31,53 @@ class CrashSiteExclude
 
 class HCSZConfig
 {
-    int g_HCSZDisableLogMessages;
-
-    int g_HCSZZombiesMin;
-    int g_HCSZZombiesMax;
-    int g_HCSZDisableUH1YZombies;
-    int g_HCSZDisableMi8Zombies;
-    int g_HCSZZombieMinDistFromHeli;
-    int g_HCSZZombieMaxDistFromHeli;
-
-    int g_HCSZAnimalsMin;
-    int g_HCSZAnimalsMax;
-    int g_HCSZDisableUH1YAnimals;
-    int g_HCSZDisableMi8Animals;
-    int g_HCSZAnimalsMinDistFromHeli;
-    int g_HCSZAnimalsMaxDistFromHeli;
-
+    bool g_HCSZDisableLogMessages;
     int g_HCSZZombieAndAnimalLifetime;
 
     int g_HCSZItemsMin;
     int g_HCSZItemsMax;
-    int g_HCSZItemsMinDistFromHeli;
-    int g_HCSZItemsMaxDistFromHeli;
+
+    int g_HCSZAnimalsMin;
+    int g_HCSZAnimalsMax;
+    int g_HCSZAnimalsMinDistFromHeli;
+    int g_HCSZAnimalsMaxDistFromHeli;
+
+    int g_HCSZZombiesMin;
+    int g_HCSZZombiesMax;
+    int g_HCSZZombieMinDistFromHeli;
+    int g_HCSZZombieMaxDistFromHeli;
+
+    int g_HCSZItemsMinDistFrom_UH1Y;
+    int g_HCSZItemsMaxDistFrom_UH1Y;
+    int g_HCSZItemsMinDistFrom_Mi8;
+    int g_HCSZItemsMaxDistFrom_Mi8;
+    int g_HCSZItemsMinDistFrom_C130;
+    int g_HCSZItemsMaxDistFrom_C130;
+
+    bool g_HCSZDisable_UH1Y_Animals;
+    bool g_HCSZDisable_Mi8_Animals;
+    bool g_HCSZDisable_Wreck_Mi8_CDF_Animals;
+    bool g_HCSZDisable_Wreck_Mi8_RU_Animals;
+    bool g_HCSZDisable_Wreck_UH1Y_Animals;
+    bool g_HCSZDisable_Wreck_C130J_Animals;
+    bool g_HCSZDisable_Wreck_C130_Camo_Animals;
+
+    bool g_HCSZDisable_UH1Y_Zombies;
+    bool g_HCSZDisable_Mi8_Zombies;
+    bool g_HCSZDisable_Wreck_Mi8_CDF_Zombies;
+    bool g_HCSZDisable_Wreck_Mi8_RU_Zombies;
+    bool g_HCSZDisable_Wreck_UH1Y_Zombies;
+    bool g_HCSZDisable_Wreck_C130J_Zombies;
+    bool g_HCSZDisable_Wreck_C130_Camo_Zombies;
+
+    bool g_HCSZDisable_UH1Y_Items;
+    bool g_HCSZDisable_Mi8_Items;
+    bool g_HCSZDisable_Wreck_Mi8_CDF_Items;
+    bool g_HCSZDisable_Wreck_Mi8_RU_Items;
+    bool g_HCSZDisable_Wreck_UH1Y_Items;
+    bool g_HCSZDisable_Wreck_C130J_Items;
+    bool g_HCSZDisable_Wreck_C130_Camo_Items;
+
     bool g_HCSZItemsRandomHealth;
     ref array<ref CrashSiteLoot> g_HCSZSpawnableItemsList;
     ref array<ref CrashSiteExclude> g_HCSZExcludedCrashSites;
@@ -95,33 +120,57 @@ protected static void CreateDefaultConfig(out HCSZConfig config)
         config.g_HCSZSpawnableItemsList = new ref array<ref CrashSiteLoot>;
         config.g_HCSZExcludedCrashSites = new ref array<ref CrashSiteExclude>;
 
-        config.g_HCSZDisableLogMessages = 0;
-
-        config.g_HCSZZombiesMin = 5;
-        config.g_HCSZZombiesMax = 12;
-        config.g_HCSZDisableUH1YZombies = 0;
-        config.g_HCSZDisableMi8Zombies = 0;
-        config.g_HCSZZombieMinDistFromHeli = 5;
-        config.g_HCSZZombieMaxDistFromHeli = 45;
-
-        config.g_HCSZAnimalsMin = 0;
-        config.g_HCSZAnimalsMax = 0;
-        config.g_HCSZDisableUH1YAnimals = 1;
-        config.g_HCSZDisableMi8Animals = 1;
-        config.g_HCSZAnimalsMinDistFromHeli = 45;
-        config.g_HCSZAnimalsMaxDistFromHeli = 90;
-
+        config.g_HCSZDisableLogMessages = false;
         config.g_HCSZZombieAndAnimalLifetime = 2700;
 
         config.g_HCSZItemsMin = 0;
         config.g_HCSZItemsMax = 15;
-        config.g_HCSZItemsMinDistFromHeli = 2;
-        config.g_HCSZItemsMaxDistFromHeli = 15;
-        config.g_HCSZItemsRandomHealth = false;
 
+        config.g_HCSZAnimalsMin = 0;
+        config.g_HCSZAnimalsMax = 0;
+        config.g_HCSZAnimalsMinDistFromHeli = 45;
+        config.g_HCSZAnimalsMaxDistFromHeli = 90;
+
+        config.g_HCSZZombiesMin = 5;
+        config.g_HCSZZombiesMax = 12;
+        config.g_HCSZZombieMinDistFromHeli = 5;
+        config.g_HCSZZombieMaxDistFromHeli = 45;
+
+        config.g_HCSZItemsMinDistFrom_UH1Y = 2;
+        config.g_HCSZItemsMaxDistFrom_UH1Y = 25;
+        config.g_HCSZItemsMinDistFrom_Mi8 = 2;
+        config.g_HCSZItemsMaxDistFrom_Mi8 = 25;
+        config.g_HCSZItemsMinDistFrom_C130 = 9;
+        config.g_HCSZItemsMaxDistFrom_C130 = 35;
+
+        config.g_HCSZDisable_UH1Y_Animals = true;
+        config.g_HCSZDisable_Mi8_Animals = true;
+        config.g_HCSZDisable_Wreck_Mi8_CDF_Animals = true;
+        config.g_HCSZDisable_Wreck_Mi8_RU_Animals = true;
+        config.g_HCSZDisable_Wreck_UH1Y_Animals = true;
+        config.g_HCSZDisable_Wreck_C130J_Animals = true;
+        config.g_HCSZDisable_Wreck_C130_Camo_Animals = true;
+    
+        config.g_HCSZDisable_UH1Y_Zombies = false;
+        config.g_HCSZDisable_Mi8_Zombies = false;
+        config.g_HCSZDisable_Wreck_Mi8_CDF_Zombies = false;
+        config.g_HCSZDisable_Wreck_Mi8_RU_Zombies = false;
+        config.g_HCSZDisable_Wreck_UH1Y_Zombies = false;
+        config.g_HCSZDisable_Wreck_C130J_Zombies = false;
+        config.g_HCSZDisable_Wreck_C130_Camo_Zombies = false;
+
+        config.g_HCSZDisable_UH1Y_Items = true;
+        config.g_HCSZDisable_Mi8_Items = true;
+        config.g_HCSZDisable_Wreck_Mi8_CDF_Items = true;
+        config.g_HCSZDisable_Wreck_Mi8_RU_Items = true;
+        config.g_HCSZDisable_Wreck_UH1Y_Items = true;
+        config.g_HCSZDisable_Wreck_C130J_Items = true;
+        config.g_HCSZDisable_Wreck_C130_Camo_Items = true;
+
+        config.g_HCSZItemsRandomHealth = false;
         config.g_HCSZSpawnableItemsList.Insert(new ref CrashSiteLoot("types_name", {"attachment1_types_name",
                                                                                     "attachment2_types_name"}));
-        config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude("<Trader with Permanent Heli Spawn>", 0, 0, 0, {"all"}));
+        config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude("New Hope Trader1", 541.244629, 423.528442, 11138.811523, {"all"}));
         config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude("<Customizable Exclusion Item Types>", 1, 0, 1, {"items", "zombies", "animals"}));
 
         if (!FileExist(configRoot))
