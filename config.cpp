@@ -4,7 +4,8 @@ class CfgPatches
 	{
 		requiredAddons[] =
 			{
-				"DZ_Data"};
+				"DZ_Data",
+				"CJ_Structures_Wrecks"};
 		requiredVersion = 0.1;
 		units[] = {};
 		weapons[] = {};
