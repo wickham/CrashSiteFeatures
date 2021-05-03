@@ -1,29 +1,31 @@
 class CrashSiteLoot
 {
     string item_type;
-    ref TStringArray attachments_type;
+    ref TStringArray attachments_list;
 
     void CrashSiteLoot(string name, ref TStringArray attachments)
     {
         item_type = name;
-        attachments_type = attachments;
+        attachments_list = attachments;
     }
 
 }
 
 class CrashSiteExclude
 {
+    string name;
     float x;
     float y;
     float z;
-    string name;
+    ref TStringArray exclude_spawns;
 
-    void CrashSiteExclude(float x_pos, float y_pos, float z_pos, string site_name)
+    void CrashSiteExclude(string site_name, float x_pos, float y_pos, float z_pos, ref TStringArray spawns)
     {
+        name = site_name;
         x = x_pos;
         y = y_pos;
         z = z_pos;
-        name = site_name;
+        exclude_spawns = spawns;
     }
 }
 
@@ -47,36 +49,35 @@ class HCSZConfig
 
     int g_HCSZZombieAndAnimalLifetime;
 
-    int g_HCSZMinNumberOfItems;
-    int g_HCSZMaxNumberOfItems;
+    int g_HCSZItemsMin;
+    int g_HCSZItemsMax;
     int g_HCSZItemsMinDistFromHeli;
     int g_HCSZItemsMaxDistFromHeli;
-    int g_HCSZItemsRandomHealth;
+    bool g_HCSZItemsRandomHealth;
     ref array<ref CrashSiteLoot> g_HCSZSpawnableItemsList;
-
     ref array<ref CrashSiteExclude> g_HCSZExcludedCrashSites;
 }
 
 class HCSZConfigManager
 {
-private static const string configPath = "$profile:\\CrashSiteFeatures\\CrashSiteConfig.json";
-private static const string configRoot = "$profile:\\CrashSiteFeatures\\";
+    private static const string configPath = "$profile:\\CrashSiteFeatures\\CrashSiteFeaturesConfig.json";
+    private static const string configRoot = "$profile:\\CrashSiteFeatures\\";
 
     static void LoadConfig(out HCSZConfig hcszConfig)
     {
         if (!FileExist(configPath))
         {
-            Print("[HCSZ] 'CrashSiteZombieConfig.json' does not exist, creating default config..");
+            Print("[HCSZ] 'CrashSiteFeaturesConfig.json' does not exist, creating default config..");
             CreateDefaultConfig(hcszConfig);
             SaveConfig(hcszConfig);
             return;
         }
 
-        Print("[HCSZ] 'CrashSiteZombieConfig.json' found, loading...");
+        Print("[HCSZ] 'CrashSiteFeaturesConfig.json' found, loading...");
         JsonFileLoader<HCSZConfig>.JsonLoadFile(configPath, hcszConfig);
     }
 
-protected static void SaveConfig(HCSZConfig hcszConfig)
+    protected static void SaveConfig(HCSZConfig hcszConfig)
     {
         if (!FileExist(configRoot))
         {
@@ -112,15 +113,16 @@ protected static void CreateDefaultConfig(out HCSZConfig config)
 
         config.g_HCSZZombieAndAnimalLifetime = 2700;
 
-        config.g_HCSZMinNumberOfItems = 15;
-        config.g_HCSZMaxNumberOfItems = 15;
-        config.g_HCSZItemsMinDistFromHeli = 5;
-        config.g_HCSZItemsMaxDistFromHeli = 45;
-        config.g_HCSZItemsRandomHealth = 0;
+        config.g_HCSZItemsMin = 0;
+        config.g_HCSZItemsMax = 15;
+        config.g_HCSZItemsMinDistFromHeli = 2;
+        config.g_HCSZItemsMaxDistFromHeli = 15;
+        config.g_HCSZItemsRandomHealth = false;
 
-        config.g_HCSZSpawnableItemsList.Insert(new ref CrashSiteLoot("name", {"attachment1",
-                                                                              "attachment2"}));
-        config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude(0,0, 0,"Trader with Permanent Heli Spawn"));
+        config.g_HCSZSpawnableItemsList.Insert(new ref CrashSiteLoot("types_name", {"attachment1_types_name",
+                                                                                    "attachment2_types_name"}));
+        config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude("<Trader with Permanent Heli Spawn>", 0, 0, 0, {"all"}));
+        config.g_HCSZExcludedCrashSites.Insert(new ref CrashSiteExclude("<Customizable Exclusion Item Types>", 1, 0, 1, {"items", "zombies", "animals"}));
 
         if (!FileExist(configRoot))
         {
