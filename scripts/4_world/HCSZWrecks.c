@@ -1,5 +1,6 @@
 modded class Wreck_UH1Y
 {
+    // TODO: WRONG MAX HEALTH
     void SetRandomItemHealth(EntityAI itemEnt, int minHealth = 1, int maxHealth = 100)
     {
         if (itemEnt)
@@ -17,7 +18,7 @@ modded class Wreck_UH1Y
             return;
 
         vector spawnPosition = this.GetPosition();
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
+        if (!hcszConfig.g_HCSZDisableLogMessages)
         {
             Print("[HCSZ] Wreck_UH1Y - heli crash spawned at " + spawnPosition);
         }
@@ -29,7 +30,7 @@ modded class Wreck_UH1Y
         Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
             {
                 Print("[HCSZ] Excluded Sites Found!");
             }
@@ -37,7 +38,7 @@ modded class Wreck_UH1Y
             for (int exclude_me_index = 0; exclude_me_index < hcszConfig.g_HCSZExcludedCrashSites.Count(); exclude_me_index++)
             {
                 ref CrashSiteExclude g_HCSZExcludedCrashSites = hcszConfig.g_HCSZExcludedCrashSites.Get(exclude_me_index);
-                if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                if (!hcszConfig.g_HCSZDisableLogMessages)
                 {
                     Print("[HCSZ] -----------------Name of Excluded Site to Check: '" + g_HCSZExcludedCrashSites.name + "'-----------------");
                 }
@@ -49,7 +50,7 @@ modded class Wreck_UH1Y
                 exclude_spawn_types = g_HCSZExcludedCrashSites.exclude_spawns;
                 if (exclusion_pos == spawnPosition)
                 {
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                         Print("[HCSZ] - Crash Site Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
@@ -93,7 +94,7 @@ modded class Wreck_UH1Y
                             break;
                         }
                     }
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                     {
                         Print("[HCSZ] - Wreck_UH1Y - Name of Excluded Site Setup: '" + g_HCSZExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Items: " + exclude_items + ", Zombies: " + exclude_zombies);
                     }
@@ -101,33 +102,33 @@ modded class Wreck_UH1Y
             }
         }
         // Zombies
-        if (hcszConfig.g_HCSZDisableUH1YZombies != 1 && !exclude_zombies)
+        if (!hcszConfig.g_HCSZDisable_UH1Y_Zombies && !exclude_zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " Wreck_UH1Y zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableUH1YAnimals != 1 && !exclude_animals)
+        if (!hcszConfig.g_HCSZDisable_UH1Y_Animals && !exclude_animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " Wreck_UH1Y animals spawned.");
         }
 
         // Items
-        if (hcszConfig.g_HCSZSpawnableItemsList && !exclude_items)
+        if (!hcszConfig.g_HCSZDisable_UH1Y_Items && !exclude_items)
         {
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
             {
                 Print("[HCSZ] -----------------FOUND ITEMS TO SPAWN!!-----------------");
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
@@ -148,19 +149,19 @@ modded class Wreck_UH1Y
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
                     item_health = (float)Math.RandomInt(1, max_health);
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                         Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
                 }
                 else
                 {
                     item_health = max_health;
                 }
-                if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFromHeli, hcszConfig.g_HCSZItemsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
             }
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " Wreck_UH1Y items spawned.");
         }
     }
@@ -190,29 +191,29 @@ modded class Wreck_Mi8
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
+        if (!hcszConfig.g_HCSZDisableLogMessages)
             Print("[HCSZ] New_Wreck_Mi8 - heli crash spawned at " + spawnPosition);
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Mi8_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_Wreck_Mi8 zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Mi8_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_Wreck_Mi8 animals spawned.");
         }
     }
@@ -238,8 +239,8 @@ modded class crashed_Wreck_C130J
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
-            Print("[HCSZ] New_crashed_Wreck_C130J - heli crash spawned at " + spawnPosition);
+        if (!hcszConfig.g_HCSZDisableLogMessages)
+            Print("[HCSZ] New_crashed_Wreck_C130J - Plane Crash spawned at " + spawnPosition);
 
         // EXCLUSION CHECK
         bool exclude_items = false;
@@ -248,7 +249,7 @@ modded class crashed_Wreck_C130J
         Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
             {
                 Print("[HCSZ] Excluded Sites Found!");
             }
@@ -256,7 +257,7 @@ modded class crashed_Wreck_C130J
             for (int exclude_me_index = 0; exclude_me_index < hcszConfig.g_HCSZExcludedCrashSites.Count(); exclude_me_index++)
             {
                 ref CrashSiteExclude g_HCSZExcludedCrashSites = hcszConfig.g_HCSZExcludedCrashSites.Get(exclude_me_index);
-                if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                if (!hcszConfig.g_HCSZDisableLogMessages)
                 {
                     Print("[HCSZ] -----------------Name of Excluded Site to Check: '" + g_HCSZExcludedCrashSites.name + "'-----------------");
                 }
@@ -268,7 +269,7 @@ modded class crashed_Wreck_C130J
                 exclude_spawn_types = g_HCSZExcludedCrashSites.exclude_spawns;
                 if (exclusion_pos == spawnPosition)
                 {
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                         Print("[HCSZ] - Crash Site Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
@@ -312,7 +313,7 @@ modded class crashed_Wreck_C130J
                             break;
                         }
                     }
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                     {
                         Print("[HCSZ] - New_crashed_Wreck_C130J - Name of Excluded Site Setup: '" + g_HCSZExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Items: " + exclude_items + ", Zombies: " + exclude_zombies);
                     }
@@ -320,9 +321,9 @@ modded class crashed_Wreck_C130J
             }
         }
         // Items
-        if (hcszConfig.g_HCSZSpawnableItemsList && !exclude_items)
+        if (!hcszConfig.g_HCSZDisable_Wreck_C130J_Items && !exclude_items)
         {
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
             {
                 Print("[HCSZ] -----------------FOUND ITEMS TO SPAWN!!-----------------");
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
@@ -343,44 +344,44 @@ modded class crashed_Wreck_C130J
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
                     item_health = (float)Math.RandomInt(1, max_health);
-                    if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                    if (!hcszConfig.g_HCSZDisableLogMessages)
                         Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
                 }
                 else
                 {
                     item_health = max_health;
                 }
-                if (hcszConfig.g_HCSZDisableLogMessages != 1)
+                if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, 9, hcszConfig.g_HCSZItemsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
             }
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " New_crashed_Wreck_C130J items spawned.");
         }
 
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_C130J_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_crashed_Wreck_C130J zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_C130J_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_crashed_Wreck_C130J animals spawned.");
         }
     }
@@ -409,29 +410,29 @@ modded class crashed_Wreck_C130_Camo
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
-            Print("[HCSZ] New_crashed_Wreck_C130_Camo - heli crash spawned at " + spawnPosition);
+        if (!hcszConfig.g_HCSZDisableLogMessages)
+            Print("[HCSZ] New_crashed_Wreck_C130_Camo - Plane Crash spawned at " + spawnPosition);
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_C130_Camo_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_crashed_Wreck_C130_Camo zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_C130_Camo_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_crashed_Wreck_C130_Camo animals spawned.");
         }
     }
@@ -457,29 +458,29 @@ modded class crashed_Wreck_Mi8_CDF
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
-            Print("[HCSZ] New_crashed_Wreck_Mi8_CDF - heli crash spawned at " + spawnPosition);
+        if (!hcszConfig.g_HCSZDisableLogMessages)
+            Print("[HCSZ] New_crashed_Wreck_Mi8_CDF - Heli Crash spawned at " + spawnPosition);
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_Mi8_CDF_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_crashed_Wreck_Mi8_CDF zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_Mi8_CDF_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_crashed_Wreck_Mi8_CDF animals spawned.");
         }
     }
@@ -505,29 +506,29 @@ modded class crashed_Wreck_Mi8_RU
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
-            Print("[HCSZ] New_crashed_Wreck_Mi8_RU - heli crash spawned at " + spawnPosition);
+        if (!hcszConfig.g_HCSZDisableLogMessages)
+            Print("[HCSZ] New_crashed_Wreck_Mi8_RU - Heli Crash spawned at " + spawnPosition);
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_Mi8_RU_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_crashed_Wreck_Mi8_RU zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_Mi8_RU_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_crashed_Wreck_Mi8_RU animals spawned.");
         }
     }
@@ -553,29 +554,29 @@ modded class crashed_Wreck_UH1Y
 
         vector spawnPosition = this.GetPosition();
 
-        if (hcszConfig.g_HCSZDisableLogMessages != 1)
-            Print("[HCSZ] New_crashed_Wreck_UH1Y - heli crash spawned at " + spawnPosition);
+        if (!hcszConfig.g_HCSZDisableLogMessages)
+            Print("[HCSZ] New_crashed_Wreck_UH1Y - Heli Crash spawned at " + spawnPosition);
         // Zombies
-        if (hcszConfig.g_HCSZDisableMi8Zombies != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_UH1Y_Zombies)
         {
             int zombiesAmount = Math.RandomInt(hcszConfig.g_HCSZZombiesMin, hcszConfig.g_HCSZZombiesMax);
 
             for (int i = 0; i <= zombiesAmount; i++)
                 SpawnInfected(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZZombieMinDistFromHeli, hcszConfig.g_HCSZZombieMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + zombiesAmount + " New_crashed_Wreck_UH1Y zombies spawned.");
         }
 
         // Animals
-        if (hcszConfig.g_HCSZDisableMi8Animals != 1)
+        if (!hcszConfig.g_HCSZDisable_Wreck_UH1Y_Animals)
         {
             int animalsAmount = Math.RandomInt(hcszConfig.g_HCSZAnimalsMin, hcszConfig.g_HCSZAnimalsMax);
 
             for (int j = 0; j <= animalsAmount; j++)
                 SpawnAnimal(GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZAnimalsMinDistFromHeli, hcszConfig.g_HCSZAnimalsMaxDistFromHeli), hcszConfig.g_HCSZZombieAndAnimalLifetime);
 
-            if (hcszConfig.g_HCSZDisableLogMessages != 1)
+            if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + animalsAmount + " New_crashed_Wreck_UH1Y animals spawned.");
         }
     }
