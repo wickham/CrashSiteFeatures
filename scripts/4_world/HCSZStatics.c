@@ -12,7 +12,7 @@ static void SpawnAnimal(vector pos, int lifetime)
         anim.SetLifetime(lifetime);
 }
 
-static ItemBase SpawnItem(string item_name, vector pos, int lifetime, float health)
+static ItemBase SpawnItem(string item_name, vector pos, int lifetime, bool rand_health, bool disable_logging)
 {
     // TODO: Add function to grab item list and attachments
     // TODO: Check if (Main Item && Attachments) -- NEW FUNCTION START
@@ -22,11 +22,12 @@ static ItemBase SpawnItem(string item_name, vector pos, int lifetime, float heal
     // TODO: Loop iter Attachments exists -- NEW FUNCTION END
     // TODO: Attach all attachments and trigger Item spawn
     ItemBase main_item = ItemBase.Cast(GetGame().CreateObject(item_name, pos, false, true));
-    Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Health: '" + health + "'");
+    if (!disable_logging)
+        Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Random Health: '" + rand_health + "'");
     return main_item;
 }
 
-static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool rand_health)
+static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool rand_health, bool disable_logging)
 {
     bool battery_required = false;
     for (int attachment_index = 0; attachment_index < attachments.Count(); attachment_index++)
@@ -37,14 +38,17 @@ static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool r
             if (attachments.Get(attachment_index) == BatteryNeededTypes().Get(batteries_req))
             {
                 battery_required = true;
-                Print("[HCSZ] Attachment Spawning WITH BATTERY: " + attachments.Get(attachment_index));
+                if (!disable_logging)
+                    Print("[HCSZ] Attachment Spawning WITH BATTERY: " + attachments.Get(attachment_index));
                 item.GetInventory().CreateAttachment(attachments.Get(attachment_index)).GetInventory().CreateAttachment("Battery9V");
-                Print("[HCSZ] Successfully attached battery+attachment to : " + item);
+                if (!disable_logging)
+                    Print("[HCSZ] Successfully attached battery+attachment to : " + item);
                 break;
             }
         }
         item.GetInventory().CreateAttachment(attachments.Get(attachment_index));
-        Print("[HCSZ] Attachment Spawned: " + attachments.Get(attachment_index) + " on Item: " + item);
+        if (!disable_logging)
+            Print("[HCSZ] Attachment Spawned: " + attachments.Get(attachment_index) + " on Item: " + item);
     }
 }
 
