@@ -134,8 +134,7 @@ modded class Wreck_UH1Y
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -148,17 +147,17 @@ modded class Wreck_UH1Y
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -305,8 +304,7 @@ modded class Wreck_Mi8
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -319,17 +317,17 @@ modded class Wreck_Mi8
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_Mi8, hcszConfig.g_HCSZItemsMaxDistFrom_Mi8), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -471,8 +469,7 @@ modded class crashed_Wreck_C130J
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -485,18 +482,17 @@ modded class crashed_Wreck_C130J
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -641,8 +637,7 @@ modded class crashed_Wreck_C130_Camo
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -655,18 +650,17 @@ modded class crashed_Wreck_C130_Camo
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -808,8 +802,7 @@ modded class crashed_Wreck_Mi8_CDF
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -822,18 +815,17 @@ modded class crashed_Wreck_Mi8_CDF
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_Mi8, hcszConfig.g_HCSZItemsMaxDistFrom_Mi8), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -975,8 +967,7 @@ modded class crashed_Wreck_Mi8_RU
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -989,18 +980,17 @@ modded class crashed_Wreck_Mi8_RU
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_Mi8, hcszConfig.g_HCSZItemsMaxDistFrom_Mi8), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -1141,8 +1131,7 @@ modded class crashed_Wreck_UH1Y
                 Print("[HCSZ] -----------------" + hcszConfig.g_HCSZSpawnableItemsList + "-----------------");
             }
             // TODO: Find how to grab max health of item to spawn
-            float max_health = 500.0;
-            float item_health;
+            bool rand_health = hcszConfig.g_HCSZItemsRandomHealth;
             int random_selected_index = 0;
             string item_to_spawn;
             // Spawn system iterator
@@ -1155,18 +1144,17 @@ modded class crashed_Wreck_UH1Y
                 // HERE
                 if (hcszConfig.g_HCSZItemsRandomHealth)
                 {
-                    item_health = (float)Math.RandomInt(1, max_health);
+                    rand_health = true;
                     if (!hcszConfig.g_HCSZDisableLogMessages)
-                        Print("[HCSZ] RANDOM HEALTH! : '" + item_health + "'");
+                        Print("[HCSZ] RANDOM HEALTH! : '" + rand_health + "'");
                 }
                 else
                 {
-                    item_health = max_health;
+                    rand_health = false;
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, rand_health, hcszConfig.g_HCSZDisableLogMessages);
                 SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)

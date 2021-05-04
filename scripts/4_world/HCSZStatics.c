@@ -12,7 +12,7 @@ static void SpawnAnimal(vector pos, int lifetime)
         anim.SetLifetime(lifetime);
 }
 
-static ItemBase SpawnItem(string item_name, vector pos, int lifetime, float health, bool disable_logging)
+static ItemBase SpawnItem(string item_name, vector pos, int lifetime, bool rand_health, bool disable_logging)
 {
     // TODO: Add function to grab item list and attachments
     // TODO: Check if (Main Item && Attachments) -- NEW FUNCTION START
@@ -23,7 +23,7 @@ static ItemBase SpawnItem(string item_name, vector pos, int lifetime, float heal
     // TODO: Attach all attachments and trigger Item spawn
     ItemBase main_item = ItemBase.Cast(GetGame().CreateObject(item_name, pos, false, true));
     if (!disable_logging)
-        Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Health: '" + health + "'");
+        Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Random Health: '" + rand_health + "'");
     return main_item;
 }
 
