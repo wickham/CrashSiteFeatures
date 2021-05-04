@@ -27,7 +27,7 @@ modded class Wreck_UH1Y
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -158,8 +158,8 @@ modded class Wreck_UH1Y
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " Wreck_UH1Y items spawned.");
@@ -198,7 +198,7 @@ modded class Wreck_Mi8
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -329,8 +329,8 @@ modded class Wreck_Mi8
                 }
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_UH1Y, hcszConfig.g_HCSZItemsMaxDistFrom_UH1Y), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " Wreck_Mi8 items spawned.");
@@ -365,7 +365,7 @@ modded class crashed_Wreck_C130J
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -496,8 +496,8 @@ modded class crashed_Wreck_C130J
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " New_crashed_Wreck_C130J items spawned.");
@@ -535,7 +535,7 @@ modded class crashed_Wreck_C130_Camo
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -666,8 +666,8 @@ modded class crashed_Wreck_C130_Camo
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " crashed_Wreck_C130_Camo items spawned.");
@@ -702,7 +702,7 @@ modded class crashed_Wreck_Mi8_CDF
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -833,8 +833,8 @@ modded class crashed_Wreck_Mi8_CDF
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " crashed_Wreck_Mi8_CDF items spawned.");
@@ -869,7 +869,7 @@ modded class crashed_Wreck_Mi8_RU
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
+
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -1000,8 +1000,8 @@ modded class crashed_Wreck_Mi8_RU
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " crashed_Wreck_Mi8_RU items spawned.");
@@ -1036,7 +1036,6 @@ modded class crashed_Wreck_UH1Y
         bool exclude_items = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
-        Print("[HCSZ] Excluded: " + hcszConfig.g_HCSZExcludedCrashSites);
         if (hcszConfig.g_HCSZExcludedCrashSites)
         {
             if (!hcszConfig.g_HCSZDisableLogMessages)
@@ -1167,8 +1166,8 @@ modded class crashed_Wreck_UH1Y
                 if (!hcszConfig.g_HCSZDisableLogMessages)
                     Print("[HCSZ] -----------------" + item_to_spawn + "-----------------");
                 // TODO: Change min distance
-                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health);
-                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false);
+                ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, hcszConfig.g_HCSZItemsMinDistFrom_C130, hcszConfig.g_HCSZItemsMaxDistFrom_C130), hcszConfig.g_HCSZZombieAndAnimalLifetime, item_health, hcszConfig.g_HCSZDisableLogMessages);
+                SpawnAttachments(itemEnt, g_HCSZSpawnableItemsList.attachments_list, false, hcszConfig.g_HCSZDisableLogMessages);
             }
             if (!hcszConfig.g_HCSZDisableLogMessages)
                 Print("[HCSZ] " + itemsAmount + " crashed_Wreck_UH1Y items spawned.");
