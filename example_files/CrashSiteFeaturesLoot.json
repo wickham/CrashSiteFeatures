@@ -25,9 +25,7 @@
                 "UniversalLight",
                 "Battery9V"
             ],
-            "Magazines": [
-                "Mag_STANAG_60Rnd"
-            ],
+            "Magazine": "Mag_STANAG_60Rnd",
             "Sight": "M68Optic",
             "SpawnPercent": 5.0
         },
@@ -37,9 +35,7 @@
                 "M4_Suppressor",
                 "M4_RISHndgrd"
             ],
-            "Magazines": [
-                "Mag_STANAG_60Rnd"
-            ],
+            "Magazine": "Mag_STANAG_30Rnd",
             "Sight": "M68Optic",
             "SpawnPercent": 50.0
         },

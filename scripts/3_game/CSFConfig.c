@@ -1,12 +1,19 @@
 class CrashSiteLoot
 {
-    string loot_type;
-    ref TStringArray attachments_list;
+    string ItemName;
 
-    void CrashSiteLoot(string name, ref TStringArray attachments)
+    ref TStringArray Attachments;
+    string Magazine;
+    string Sight;
+    float SpawnPercent;
+
+    void CrashSiteLoot(string name, ref TStringArray attachments, string sight, float chance)
     {
-        loot_type = name;
-        attachments_list = attachments;
+        ItemName = name;
+        Attachments = attachments;
+        Magazine = attachments;
+        Sight = sight;
+        SpawnPercent = chance;
     }
 
 }
@@ -216,8 +223,16 @@ class CSFConfigManager
             loot.g_CSFLootMinDistFrom_C130 = 9;
             loot.g_CSFLootMaxDistFrom_C130 = 35;
 
-            loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot("types_name", {"attachment1_types_name",
-                                                                                        "attachment2_types_name"}));
+            loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
+                "item_type",
+                {
+                    "attachment_type1",
+                    "attachment_type2_battery_req",
+                    "attachemnt_type2_battery_name"
+                },
+                "magazine_type",
+                "sight_type",
+                "float_chance_0.0-100.0"));
 
             if (!FileExist(configRoot))
             {

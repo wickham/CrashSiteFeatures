@@ -41,14 +41,14 @@ modded class Wreck_UH1Y
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -97,7 +97,7 @@ modded class Wreck_UH1Y
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -211,14 +211,14 @@ modded class Wreck_Mi8
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -267,7 +267,7 @@ modded class Wreck_Mi8
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - Wreck_Mi8 - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - Wreck_Mi8 - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -377,14 +377,14 @@ modded class crashed_Wreck_C130J
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -433,7 +433,7 @@ modded class crashed_Wreck_C130J
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_C130J - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_C130J - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -545,14 +545,14 @@ modded class crashed_Wreck_C130_Camo
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -601,7 +601,7 @@ modded class crashed_Wreck_C130_Camo
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_C130_Camo - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_C130_Camo - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -710,14 +710,14 @@ modded class crashed_Wreck_Mi8_CDF
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -766,7 +766,7 @@ modded class crashed_Wreck_Mi8_CDF
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_Mi8_CDF - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_Mi8_CDF - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -875,14 +875,14 @@ modded class crashed_Wreck_Mi8_RU
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -931,7 +931,7 @@ modded class crashed_Wreck_Mi8_RU
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_Mi8_RU - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_Mi8_RU - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -1039,14 +1039,14 @@ modded class crashed_Wreck_UH1Y
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.name + "'-----------------");
+                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
-                exclusion_pos[0] = g_CSFExcludedCrashSites.x;
-                exclusion_pos[1] = g_CSFExcludedCrashSites.y;
-                exclusion_pos[2] = g_CSFExcludedCrashSites.z;
-                exclude_spawn_types = g_CSFExcludedCrashSites.exclude_spawns;
+                exclusion_pos[0] = g_CSFExcludedCrashSites.X;
+                exclusion_pos[1] = g_CSFExcludedCrashSites.Y;
+                exclusion_pos[2] = g_CSFExcludedCrashSites.Z;
+                exclude_spawn_types = g_CSFExcludedCrashSites.ExcludedSpawns;
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
@@ -1095,7 +1095,7 @@ modded class crashed_Wreck_UH1Y
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.name + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
