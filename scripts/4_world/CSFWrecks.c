@@ -142,7 +142,7 @@ modded class Wreck_UH1Y
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -158,7 +158,7 @@ modded class Wreck_UH1Y
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_UH1Y, csfLoot.g_CSFLootMaxDistFrom_UH1Y), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " Wreck_UH1Y loot spawned.");
@@ -312,7 +312,7 @@ modded class Wreck_Mi8
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -328,7 +328,7 @@ modded class Wreck_Mi8
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " Wreck_Mi8 loot spawned.");
@@ -477,7 +477,7 @@ modded class crashed_Wreck_C130J
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -493,7 +493,7 @@ modded class crashed_Wreck_C130J
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_C130, csfLoot.g_CSFLootMaxDistFrom_C130), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " crashed_Wreck_C130J loot spawned.");
@@ -645,7 +645,7 @@ modded class crashed_Wreck_C130_Camo
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -661,7 +661,7 @@ modded class crashed_Wreck_C130_Camo
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_C130, csfLoot.g_CSFLootMaxDistFrom_C130), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " crashed_Wreck_C130_Camo loot spawned.");
@@ -810,7 +810,7 @@ modded class crashed_Wreck_Mi8_CDF
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -826,7 +826,7 @@ modded class crashed_Wreck_Mi8_CDF
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " crashed_Wreck_Mi8_CDF loot spawned.");
@@ -975,7 +975,7 @@ modded class crashed_Wreck_Mi8_RU
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -991,7 +991,7 @@ modded class crashed_Wreck_Mi8_RU
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " crashed_Wreck_Mi8_RU loot spawned.");
@@ -1139,7 +1139,8 @@ modded class crashed_Wreck_UH1Y
             for (int k = 0; k < lootAmount; k++)
             {
                 ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(Math.RandomInt(0, csfLoot.g_CSFSpawnableLootList.Count()));
-                item_to_spawn = g_CSFSpawnableLootList.loot_type;
+
+                item_to_spawn = g_CSFSpawnableLootList.ItemName;
                 // TODO: Check if item is valid
                 // HERE
                 if (csfLoot.g_CSFLootRandomHealth)
@@ -1155,7 +1156,7 @@ modded class crashed_Wreck_UH1Y
                 if (!csfConfig.g_CSFDisableLogMessages)
                     Print("[CSF] -----------------" + item_to_spawn + "-----------------");
                 ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_UH1Y, csfLoot.g_CSFLootMaxDistFrom_UH1Y), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.attachments_list, false, csfConfig.g_CSFDisableLogMessages);
+                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
             }
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + lootAmount + " crashed_Wreck_UH1Y loot spawned.");

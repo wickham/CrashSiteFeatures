@@ -7,11 +7,11 @@ class CrashSiteLoot
     string Sight;
     float SpawnPercent;
 
-    void CrashSiteLoot(string name, ref TStringArray attachments, string sight, float chance)
+    void CrashSiteLoot(string name, ref TStringArray attachments, string magazine, string sight, float chance)
     {
         ItemName = name;
         Attachments = attachments;
-        Magazine = attachments;
+        Magazine = magazine;
         Sight = sight;
         SpawnPercent = chance;
     }
@@ -232,7 +232,7 @@ class CSFConfigManager
                 },
                 "magazine_type",
                 "sight_type",
-                "float_chance_0.0-100.0"));
+                100.0));
 
             if (!FileExist(configRoot))
             {
