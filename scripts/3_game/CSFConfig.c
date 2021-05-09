@@ -233,6 +233,17 @@ class CSFConfigManager
                 "magazine_type",
                 "sight_type",
                 100.0));
+            loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
+                "M4A1",
+                {
+                    "M4_Suppressor",
+                    "M4_RISHndgrd",
+                    "UniversalLight",
+                    "Battery9V"
+                },
+                "Mag_STANAG_60Rnd",
+                "M68Optic",
+                25.0));
 
             if (!FileExist(configRoot))
             {
