@@ -1,84 +1,44 @@
 {
-    "g_HCSZDisableLogMessages": 0,
-    "g_HCSZZombieAndAnimalLifetime": 2700,
-    "g_HCSZItemsMin": 0,
-    "g_HCSZItemsMax": 15,
-    "g_HCSZAnimalsMin": 0,
-    "g_HCSZAnimalsMax": 0,
-    "g_HCSZAnimalsMinDistFromHeli": 45,
-    "g_HCSZAnimalsMaxDistFromHeli": 90,
-    "g_HCSZZombiesMin": 5,
-    "g_HCSZZombiesMax": 12,
-    "g_HCSZZombieMinDistFromHeli": 5,
-    "g_HCSZZombieMaxDistFromHeli": 45,
-    "g_HCSZItemsMinDistFrom_UH1Y": 2,
-    "g_HCSZItemsMaxDistFrom_UH1Y": 25,
-    "g_HCSZItemsMinDistFrom_Mi8": 2,
-    "g_HCSZItemsMaxDistFrom_Mi8": 25,
-    "g_HCSZItemsMinDistFrom_C130": 9,
-    "g_HCSZItemsMaxDistFrom_C130": 35,
-    "g_HCSZDisable_UH1Y_Animals": 1,
-    "g_HCSZDisable_Mi8_Animals": 1,
-    "g_HCSZDisable_Wreck_Mi8_CDF_Animals": 1,
-    "g_HCSZDisable_Wreck_Mi8_RU_Animals": 1,
-    "g_HCSZDisable_Wreck_UH1Y_Animals": 1,
-    "g_HCSZDisable_Wreck_C130J_Animals": 1,
-    "g_HCSZDisable_Wreck_C130_Camo_Animals": 0,
-    "g_HCSZDisable_UH1Y_Zombies": 0,
-    "g_HCSZDisable_Mi8_Zombies": 0,
-    "g_HCSZDisable_Wreck_Mi8_CDF_Zombies": 0,
-    "g_HCSZDisable_Wreck_Mi8_RU_Zombies": 0,
-    "g_HCSZDisable_Wreck_UH1Y_Zombies": 0,
-    "g_HCSZDisable_Wreck_C130J_Zombies": 0,
-    "g_HCSZDisable_Wreck_C130_Camo_Zombies": 1,
-    "g_HCSZDisable_UH1Y_Items": 0,
-    "g_HCSZDisable_Mi8_Items": 0,
-    "g_HCSZDisable_Wreck_Mi8_CDF_Items": 1,
-    "g_HCSZDisable_Wreck_Mi8_RU_Items": 1,
-    "g_HCSZDisable_Wreck_UH1Y_Items": 1,
-    "g_HCSZDisable_Wreck_C130J_Items": 0,
-    "g_HCSZDisable_Wreck_C130_Camo_Items": 1,
-    "g_HCSZItemsRandomHealth": 0,
-    "g_HCSZSpawnableItemsList": [
+    "g_CSFDisableLogMessages": 0,
+    "g_CSFZombieAndAnimalLifetime": 2700,
+    "g_CSFAnimalsMin": 0,
+    "g_CSFAnimalsMax": 0,
+    "g_CSFAnimalsMinDistFromHeli": 45,
+    "g_CSFAnimalsMaxDistFromHeli": 90,
+    "g_CSFZombiesMin": 5,
+    "g_CSFZombiesMax": 12,
+    "g_CSFZombieMinDistFromHeli": 5,
+    "g_CSFZombieMaxDistFromHeli": 45,
+    "g_CSFDisable_UH1Y_Animals": 1,
+    "g_CSFDisable_Mi8_Animals": 1,
+    "g_CSFDisable_Wreck_Mi8_CDF_Animals": 1,
+    "g_CSFDisable_Wreck_Mi8_RU_Animals": 1,
+    "g_CSFDisable_Wreck_UH1Y_Animals": 1,
+    "g_CSFDisable_Wreck_C130J_Animals": 1,
+    "g_CSFDisable_Wreck_C130_Camo_Animals": 1,
+    "g_CSFDisable_UH1Y_Zombies": 0,
+    "g_CSFDisable_Mi8_Zombies": 0,
+    "g_CSFDisable_Wreck_Mi8_CDF_Zombies": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_Zombies": 0,
+    "g_CSFDisable_Wreck_UH1Y_Zombies": 0,
+    "g_CSFDisable_Wreck_C130J_Zombies": 0,
+    "g_CSFDisable_Wreck_C130_Camo_Zombies": 0,
+    "g_CSFExcludedCrashSites": [
         {
-            "item_type": "M4A1",
-            "attachments_list": [
-                "M4_Suppressor",
-                "M4_T3NRDSOptic",
-                "M4_OEBttstck",
-                "M4_RISHndgrd",
-                "Mag_STANAGCoupled_30Rnd"
-            ]
-        },
-        {
-            "item_type": "ASVAL",
-            "attachments_list": [
-                "Mag_VSS_10Rnd"
-            ]
-        },
-        {
-            "item_type": "PersonalRadio",
-            "attachments_list": [
-                "Battery9V"
-            ]
-        }
-    ],
-    "g_HCSZExcludedCrashSites": [
-        {
-            "name": "New Hope Trader1",
-            "x": 541.24462890625,
-            "y": 423.5284423828125,
-            "z": 11138.8115234375,
-            "exclude_spawns": [
+            "Label": "New Hope Trader1",
+            "X": 541.244629,
+            "Y": 423.528442,
+            "Z": 11138.811523,
+            "ExcludedSpawns": [
                 "all"
             ]
         },
         {
-            "name": "New Hope Trader2",
-            "x": 540.356018,
-            "y": 423.536011,
-            "z": 11137.599609,
-            "exclude_spawns": [
+            "Label": "New Hope Trader2",
+            "X": 540.356018,
+            "Y": 423.536011,
+            "Z": 11137.599609,
+            "ExcludedSpawns": [
                 "all"
             ]
         }

@@ -23,7 +23,7 @@ static ItemBase SpawnItem(string item_name, vector pos, int lifetime, bool rand_
     // TODO: Attach all attachments and trigger Item spawn
     ItemBase main_item = ItemBase.Cast(GetGame().CreateObject(item_name, pos, false, true));
     if (!disable_logging)
-        Print("[HCSZ] Item Spawned: '" + item_name + "'" + " With Random Health: '" + rand_health + "'");
+        Print("[CSF] Item Spawned: '" + item_name + "'" + " With Random Health: '" + rand_health + "'");
     return main_item;
 }
 
@@ -39,16 +39,16 @@ static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool r
             {
                 battery_required = true;
                 if (!disable_logging)
-                    Print("[HCSZ] Attachment Spawning WITH BATTERY: " + attachments.Get(attachment_index));
+                    Print("[CSF] Attachment Spawning WITH BATTERY: " + attachments.Get(attachment_index));
                 item.GetInventory().CreateAttachment(attachments.Get(attachment_index)).GetInventory().CreateAttachment("Battery9V");
                 if (!disable_logging)
-                    Print("[HCSZ] Successfully attached battery+attachment to : " + item);
+                    Print("[CSF] Successfully attached battery+attachment to : " + item);
                 break;
             }
         }
         item.GetInventory().CreateAttachment(attachments.Get(attachment_index));
         if (!disable_logging)
-            Print("[HCSZ] Attachment Spawned: " + attachments.Get(attachment_index) + " on Item: " + item);
+            Print("[CSF] Attachment Spawned: " + attachments.Get(attachment_index) + " on Item: " + item);
     }
 }
 

@@ -1,0 +1,54 @@
+{
+    "g_CSFLootMin": 0,
+    "g_CSFLootMax": 15,
+    "g_CSFLootLifetime": 2700,
+    "g_CSFLootRandomHealth": 0,
+    "g_CSFLootMinDistFrom_UH1Y": 2,
+    "g_CSFLootMaxDistFrom_UH1Y": 25,
+    "g_CSFLootMinDistFrom_Mi8": 2,
+    "g_CSFLootMaxDistFrom_Mi8": 25,
+    "g_CSFLootMinDistFrom_C130": 9,
+    "g_CSFLootMaxDistFrom_C130": 35,
+    "g_CSFDisable_UH1Y_Loot": 0,
+    "g_CSFDisable_Mi8_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_CDF_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_Loot": 0,
+    "g_CSFDisable_Wreck_UH1Y_Loot": 0,
+    "g_CSFDisable_Wreck_C130J_Loot": 0,
+    "g_CSFDisable_Wreck_C130_Camo_Loot": 0,
+    "g_CSFSpawnableLootList": [
+        {
+            "ItemName": "M4A1",
+            "Attachments": [
+                "M4_Suppressor",
+                "M4_RISHndgrd",
+                "UniversalLight",
+                "Battery9V"
+            ],
+            "Magazines": [
+                "Mag_STANAG_60Rnd"
+            ],
+            "Sight": "M68Optic",
+            "SpawnPercent": 5.0
+        },
+        {
+            "ItemName": "M4A1",
+            "Attachments": [
+                "M4_Suppressor",
+                "M4_RISHndgrd"
+            ],
+            "Magazines": [
+                "Mag_STANAG_60Rnd"
+            ],
+            "Sight": "M68Optic",
+            "SpawnPercent": 50.0
+        },
+        {
+            "ItemName": "PersonalRadio",
+            "Attachments": [
+                "Battery9V"
+            ],
+            "SpawnPercent": 100.0
+        }
+    ]
+}
