@@ -52,6 +52,51 @@ static void SpawnAttachments(ItemBase item, ref TStringArray attachments, bool r
     }
 }
 
+static void SpawnMag(ItemBase item, string mag, bool rand_health, bool disable_logging)
+{
+    item.GetInventory().CreateAttachment(mag);
+    if (!disable_logging)
+        Print("[CSF] Magazine Spawned: " + mag + " on Item: " + item);
+}
+
+static void SpawnSight(ItemBase item, string sight, bool rand_health, bool disable_logging)
+{
+    switch (sight)
+    {
+        // case "random":
+        //     string sight_to_spawn = SightTypes().GetRandomElement();
+        //     EntityAI sightEnt = item.GetInventory().CreateAttachment(sight_to_spawn);
+        //     Print("[CSF] {SpawnSight} " + sight_to_spawn);
+
+        //     // TODO: Check static list of items that require 9V/other attachments and logic
+        //     for (int batteries_req = 0; batteries_req < BatteryNeededTypes().Count(); batteries_req++)
+        //     {
+        //         if (sight_to_spawn == BatteryNeededTypes().Get(batteries_req))
+        //         {
+        //             if (!disable_logging)
+        //                 Print("[CSF] Attachment Spawning WITH BATTERY: " + sight_to_spawn);
+        //             sightEnt.GetInventory().CreateAttachment("Battery9V");
+        //             break;
+        //         }
+        //     }
+
+        //     if (!disable_logging)
+        //         Print("[CSF] Random Sight: " + sight + " on Item: " + item);
+        //     break;
+
+    case "none":
+        if (!disable_logging)
+            Print("[CSF] no SIGHT requested... NOT YET IMPLEMENTED");
+        return;
+
+    default:
+        item.GetInventory().CreateAttachment(sight).GetInventory().CreateAttachment("Battery9V");
+        if (!disable_logging)
+            Print("[CSF] Attachment Sight: " + sight + " on Item: " + item);
+        break;
+    }
+}
+
 static vector GetRandomSpawnPosition(vector centerpoint, int minDistFromHeli, int maxDistFromHeli)
 {
     float height = Math.RandomFloat(0.0, 2.0) * Math.PI;
@@ -61,6 +106,57 @@ static vector GetRandomSpawnPosition(vector centerpoint, int minDistFromHeli, in
     randomSpawnPosition[1] = GetGame().SurfaceY(randomSpawnPosition[0], randomSpawnPosition[2]) + 0.5;
 
     return randomSpawnPosition;
+}
+
+static void SpawnItemsInList(
+    ref CrashSiteLoot loot_list,
+    vector spawn_position,
+    int min_dist,
+    int max_dist,
+    int lifetime,
+    bool rand_health,
+    bool is_logging_disabled)
+{
+    // Begin spawning items+attachments
+    if (is_logging_disabled)
+        Print("[CSF] {DEBUG} ---{SpawnListOfItems}---" + loot_list.ItemName + "-----------------");
+    ItemBase itemEnt = SpawnItem(loot_list.ItemName, GetRandomSpawnPosition(spawn_position, min_dist, max_dist), lifetime, rand_health, is_logging_disabled);
+    if (loot_list.Attachments)
+    {
+        Print("[CSF] {DEBUG} Requested Attachments --- " + loot_list.Attachments.Count());
+        SpawnAttachments(itemEnt, loot_list.Attachments, rand_health, is_logging_disabled);
+    }
+
+    if (loot_list.Sight)
+    {
+        Print("[CSF] {DEBUG} Requested SpawnSight --- " + loot_list.Sight);
+        SpawnSight(itemEnt, loot_list.Sight, rand_health, is_logging_disabled);
+    }
+    if (loot_list.Magazine)
+    {
+        Print("[CSF] {DEBUG} Requested Magazine --- " + loot_list.Magazine);
+        SpawnMag(itemEnt, loot_list.Magazine, rand_health, is_logging_disabled);
+    }
+}
+
+static bool IncludeLoot(ref TStringArray included_wrecks, string crash_type)
+{
+    // "Mi8","UH1Y","C130","all", "none"
+    if (!included_wrecks)
+    {
+        Print("[CSF] {DEBUG} Defaulting to INCLUDED ALL'");
+        return true;
+    }
+    for (int item_wreck_index = 0; item_wreck_index < included_wrecks.Count(); item_wreck_index++)
+    {
+        if (included_wrecks[item_wreck_index].Contains(crash_type) || included_wrecks[item_wreck_index].Contains("all") || !included_wrecks[item_wreck_index].Contains("none"))
+        {
+            Print("[CSF] {DEBUG} Loot INCLUDED for: '" + crash_type + "'");
+            return true;
+        }
+    }
+    Print("[CSF] {DEBUG} Loot NOT INCLUDED for: '" + crash_type + "'");
+    return false;
 }
 
 static TStringArray ZombieTypes()
@@ -87,5 +183,122 @@ static TStringArray AnimalTypes()
 
 static TStringArray BatteryNeededTypes()
 {
-    return {"M4_T3NRDSOptic", "PersonalRadio", "UniversalFlashlight"};
+    return {
+        "PersonalRadio",
+        "UniversalLight",
+        "M68Optic",
+        "FNP45_MRDSOptic",
+        "KobraOptic",
+        "M4_T3NRDSOptic",
+        "PSO11Optic",
+        "PSO1Optic",
+        "PistolOptic",
+        "ReflexOptic",
+        // Advanced Scopes
+        "AD_ACOG_RMR",
+        "AD_ACOG_RMR_MosinMount",
+        "AD_ACOG_RMR_B13",
+        "AD_NFATACR",
+        "AD_NFATACR_MosinMount",
+        "AD_NFATACR_B13",
+        "AD_NFATACR_1_8",
+        "AD_NFATACR_1_8_MosinMount",
+        "AD_NFATACR_1_8_B13",
+        "AD_RMR",
+        "AD_RMR_LM",
+        "AD_RMR_LM_MosinMount",
+        "AD_RMR_LM_B13",
+        "AD_RMR_TM",
+        "AD_RMR_TM_MosinMount",
+        "AD_RMR_TM_B13",
+        // ASC LVOA Scopes
+        "ASC_LVOAC_HurricaneOptic",
+        "ASC_LVOAC_HurricaneOptic_Camo",
+        "ASC_LVOAC_HurricaneOptic_DigiTan",
+        "ASC_LVOAC_HurricaneOptic_Tan",
+        "ASC_LVOAC_HurricaneOptic_UCP",
+        // Morty Sights
+        "TTC_Holo",
+        "TTC_HAMR",
+        // MSFC NVG
+        "MSFC_NVG",
+        "MSFC_NVG_One",
+        "MSFC_NVG_GPNVG18",
+        ""};
+}
+
+static TStringArray SightTypes()
+{
+    return {
+        "ACOGOptic",
+        "M68Optic",
+        "BUISOptic",
+        "FNP45_MRDSOptic",
+        "HuntingOptic",
+        "KashtanOptic",
+        "KazuarOptic",
+        "KobraOptic",
+        "M4_T3NRDSOptic",
+        "PSO11Optic",
+        "PSO1Optic",
+        "PUScopeOptic",
+        "PistolOptic",
+        "ReflexOptic",
+        // Advanced Scopes
+        "AD_B13Mount",
+        "AD_MosinMount",
+        "AD_ACOG",
+        "AD_ACOG_MosinMount",
+        "AD_ACOG_B13",
+        "AD_ACOG_RMR",
+        "AD_ACOG_RMR_MosinMount",
+        "AD_ACOG_RMR_B13",
+        "AD_DHF5",
+        "AD_DHF5_MosinMount",
+        "AD_DHF5_B13",
+        "AD_MRS",
+        "AD_MRS_MosinMount",
+        "AD_MRS_B13",
+        "AD_NFATACR",
+        "AD_NFATACR_MosinMount",
+        "AD_NFATACR_B13",
+        "AD_NFATACR_1_8",
+        "AD_NFATACR_1_8_MosinMount",
+        "AD_NFATACR_1_8_B13",
+        "AD_OKP7",
+        "AD_OKP7_MosinMount",
+        "AD_OKP7_B13",
+        "AD_Pilad",
+        "AD_Pilad_MosinMount",
+        "AD_Pilad_B13",
+        "AD_PVS4",
+        "AD_PVS4_MosinMount",
+        "AD_PVS4_B13",
+        "AD_RMR",
+        "AD_RMR_LM",
+        "AD_RMR_LM_MosinMount",
+        "AD_RMR_LM_B13",
+        "AD_RMR_TM",
+        "AD_RMR_TM_MosinMount",
+        "AD_RMR_TM_B13",
+        "AD_SpecterDR",
+        "AD_SpecterDR_MosinMount",
+        "AD_SpecterDR_B13",
+        // ACS Lvoa Scopes
+        "ASC_LVOAC_MilStdScope",
+        "ASC_LVOAC_MilStdScope_OliveGreen",
+        "ASC_LVOAC_MilStdScope_Tan",
+        "ASC_LVOAC_HurricaneOptic",
+        "ASC_LVOAC_HurricaneOptic_Camo",
+        "ASC_LVOAC_HurricaneOptic_DigiTan",
+        "ASC_LVOAC_HurricaneOptic_Tan",
+        "ASC_LVOAC_HurricaneOptic_UCP",
+        // Morty Sights
+        "TTC_G3_Optic",
+        "TTC_Holo",
+        "TTC_HAMR",
+        // MFSC Optics
+        "MSFC_Optic_EOtech_XPS20",
+        "MSFC_Optic_HartmanMH1",
+        "none"};
 }
