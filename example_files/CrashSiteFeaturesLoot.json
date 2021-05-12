@@ -1,6 +1,6 @@
 {
     "g_CSFLootMin": 0,
-    "g_CSFLootMax": 15,
+    "g_CSFLootMax": 8,
     "g_CSFLootLifetime": 2700,
     "g_CSFLootRandomHealth": 0,
     "g_CSFLootMinDistFrom_UH1Y": 2,
@@ -22,29 +22,40 @@
             "Attachments": [
                 "M4_Suppressor",
                 "M4_RISHndgrd",
-                "UniversalLight",
-                "Battery9V"
+                "M4_CQBBttstck",
+                "UniversalLight"
             ],
             "Magazine": "Mag_STANAG_60Rnd",
-            "Sight": "M68Optic",
-            "SpawnPercent": 5.0
+            "MinCount": 0,
+            "MaxCount": 5,
+            "IncludedWrecks": [
+                "Mi8",
+                "UH1Y",
+                "C130"
+            ]
         },
         {
             "ItemName": "M4A1",
             "Attachments": [
                 "M4_Suppressor",
-                "M4_RISHndgrd"
+                "M4_RISHndgrd",
+                "M4_MPBttstck"
             ],
             "Magazine": "Mag_STANAG_30Rnd",
             "Sight": "M68Optic",
-            "SpawnPercent": 50.0
+            "MinCount": 0,
+            "MaxCount": 5,
+            "IncludedWrecks": [
+                "Mi8"
+            ]
         },
         {
             "ItemName": "PersonalRadio",
             "Attachments": [
                 "Battery9V"
             ],
-            "SpawnPercent": 100.0
+            "MinCount": 0,
+            "MaxCount": 5
         }
     ]
 }

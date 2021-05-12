@@ -5,17 +5,20 @@ class CrashSiteLoot
     ref TStringArray Attachments;
     string Magazine;
     string Sight;
-    float SpawnPercent;
+    int MinCount;
+    int MaxCount;
+    ref TStringArray IncludedWrecks;
 
-    void CrashSiteLoot(string name, ref TStringArray attachments, string magazine, string sight, float chance)
+    void CrashSiteLoot(string name, ref TStringArray attachments, string magazine, string sight, int min_count, int max_count, ref TStringArray wrecks)
     {
         ItemName = name;
         Attachments = attachments;
         Magazine = magazine;
         Sight = sight;
-        SpawnPercent = chance;
+        MinCount = min_count;
+        MaxCount = max_count;
+        IncludedWrecks = wrecks;
     }
-
 }
 
 class CrashSiteExclude
@@ -69,6 +72,7 @@ class CSFConfig
 
     ref array<ref CrashSiteExclude> g_CSFExcludedCrashSites;
 }
+
 class CSFLoot
 {
     int g_CSFLootMin;
@@ -97,9 +101,9 @@ class CSFLoot
 
 class CSFConfigManager
 {
-    private static const string config_path = "$profile:\\CrashSiteFeatures\\CrashSiteFeaturesConfig.json";
-    private static const string loot_path = "$profile:\\CrashSiteFeatures\\CrashSiteFeaturesLoot.json";
-    private static const string configRoot = "$profile:\\CrashSiteFeatures\\";
+private static const string config_path = "$profile:\\CrashSiteFeatures\\CrashSiteFeaturesConfig.json";
+private static const string loot_path = "$profile:\\CrashSiteFeatures\\CrashSiteFeaturesLoot.json";
+private static const string configRoot = "$profile:\\CrashSiteFeatures\\";
 
     // Check for CONFIG
     static void LoadConfig(out CSFConfig csfConfig)
@@ -129,127 +133,137 @@ class CSFConfigManager
     }
 
     // Save Config
-    protected static void SaveConfig(CSFConfig csfConfig)
-        {
-            if (!FileExist(configRoot))
-            {
-                Print("[CSF] - '" + configRoot + "' does not exist, creating...");
-                MakeDirectory(configRoot);
-            }
-
-            JsonFileLoader<CSFConfig>.JsonSaveFile(config_path, csfConfig);
-        }
-
-    // Save Loot
-    protected static void SaveLoot(CSFLoot csfLoot)
-        {
-            if (!FileExist(configRoot))
-            {
-                Print("[CSF] - '" + configRoot + "' does not exist, creating...");
-                MakeDirectory(configRoot);
-            }
-
-            JsonFileLoader<CSFLoot>.JsonSaveFile(loot_path, csfLoot);
-        }
-
-    protected static void CreateDefaultConfig(out CSFConfig config)
+protected static void SaveConfig(CSFConfig csfConfig)
     {
-            config = new CSFConfig();
-            config.g_CSFExcludedCrashSites = new ref array<ref CrashSiteExclude>;
+        if (!FileExist(configRoot))
+        {
+            Print("[CSF] - '" + configRoot + "' does not exist, creating...");
+            MakeDirectory(configRoot);
+        }
 
-            config.g_CSFDisableLogMessages = false;
-            config.g_CSFZombieAndAnimalLifetime = 2700;
-
-            config.g_CSFAnimalsMin = 0;
-            config.g_CSFAnimalsMax = 0;
-            config.g_CSFAnimalsMinDistFromHeli = 45;
-            config.g_CSFAnimalsMaxDistFromHeli = 90;
-
-            config.g_CSFZombiesMin = 5;
-            config.g_CSFZombiesMax = 12;
-            config.g_CSFZombieMinDistFromHeli = 5;
-            config.g_CSFZombieMaxDistFromHeli = 45;
-
-            config.g_CSFDisable_UH1Y_Animals = true;
-            config.g_CSFDisable_Mi8_Animals = true;
-            config.g_CSFDisable_Wreck_Mi8_CDF_Animals = true;
-            config.g_CSFDisable_Wreck_Mi8_RU_Animals = true;
-            config.g_CSFDisable_Wreck_UH1Y_Animals = true;
-            config.g_CSFDisable_Wreck_C130J_Animals = true;
-            config.g_CSFDisable_Wreck_C130_Camo_Animals = true;
-        
-            config.g_CSFDisable_UH1Y_Zombies = false;
-            config.g_CSFDisable_Mi8_Zombies = false;
-            config.g_CSFDisable_Wreck_Mi8_CDF_Zombies = false;
-            config.g_CSFDisable_Wreck_Mi8_RU_Zombies = false;
-            config.g_CSFDisable_Wreck_UH1Y_Zombies = false;
-            config.g_CSFDisable_Wreck_C130J_Zombies = false;
-            config.g_CSFDisable_Wreck_C130_Camo_Zombies = false;
-
-            config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("New Hope Trader1", 541.244629, 423.528442, 11138.811523, {"all"}));
-            config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("<Customizable Exclusion Loot Types>", 1, 0, 1, {"loot", "zombies", "animals"}));
-
-            if (!FileExist(configRoot))
-            {
-                Print("[CSF] - '" + configRoot + "' does not exist, creating...");
-                MakeDirectory(configRoot);
-            }
-            JsonFileLoader<CSFConfig>.JsonSaveFile(config_path, config);
+        JsonFileLoader<CSFConfig>.JsonSaveFile(config_path, csfConfig);
     }
 
-    protected static void CreateDefaultLoot(out CSFLoot loot)
+    // Save Loot
+protected static void SaveLoot(CSFLoot csfLoot)
     {
-            loot = new CSFLoot();
+        if (!FileExist(configRoot))
+        {
+            Print("[CSF] - '" + configRoot + "' does not exist, creating...");
+            MakeDirectory(configRoot);
+        }
 
-            loot.g_CSFSpawnableLootList = new ref array<ref CrashSiteLoot>;
+        JsonFileLoader<CSFLoot>.JsonSaveFile(loot_path, csfLoot);
+    }
 
-            loot.g_CSFDisable_UH1Y_Loot = true;
-            loot.g_CSFDisable_Mi8_Loot = true;
-            loot.g_CSFDisable_Wreck_Mi8_CDF_Loot = true;
-            loot.g_CSFDisable_Wreck_Mi8_RU_Loot = true;
-            loot.g_CSFDisable_Wreck_UH1Y_Loot = true;
-            loot.g_CSFDisable_Wreck_C130J_Loot = true;
-            loot.g_CSFDisable_Wreck_C130_Camo_Loot = true;
+protected static void CreateDefaultConfig(out CSFConfig config)
+    {
+        config = new CSFConfig();
+        config.g_CSFExcludedCrashSites = new ref array<ref CrashSiteExclude>;
 
-            loot.g_CSFLootMin = 0;
-            loot.g_CSFLootMax = 15;
-            loot.g_CSFLootLifetime = 2700;
-            loot.g_CSFLootRandomHealth = false;
+        config.g_CSFDisableLogMessages = false;
+        config.g_CSFZombieAndAnimalLifetime = 2700;
 
-            loot.g_CSFLootMinDistFrom_UH1Y = 2;
-            loot.g_CSFLootMaxDistFrom_UH1Y = 25;
-            loot.g_CSFLootMinDistFrom_Mi8 = 2;
-            loot.g_CSFLootMaxDistFrom_Mi8 = 25;
-            loot.g_CSFLootMinDistFrom_C130 = 9;
-            loot.g_CSFLootMaxDistFrom_C130 = 35;
+        config.g_CSFAnimalsMin = 0;
+        config.g_CSFAnimalsMax = 0;
+        config.g_CSFAnimalsMinDistFromHeli = 45;
+        config.g_CSFAnimalsMaxDistFromHeli = 90;
 
-            loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
-                "item_type",
-                {
-                    "attachment_type1",
-                    "attachment_type2_battery_req",
-                    "attachemnt_type2_battery_name"
-                },
-                "magazine_type",
-                "sight_type",
-                100.0));
-            loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
-                "M4A1",
-                {
-                    "M4_Suppressor",
-                    "M4_RISHndgrd",
-                    "UniversalLight",
-                    "Battery9V"
-                },
-                "Mag_STANAG_60Rnd",
-                "M68Optic",
-                25.0));
+        config.g_CSFZombiesMin = 5;
+        config.g_CSFZombiesMax = 12;
+        config.g_CSFZombieMinDistFromHeli = 5;
+        config.g_CSFZombieMaxDistFromHeli = 45;
 
-            if (!FileExist(configRoot))
+        config.g_CSFDisable_UH1Y_Animals = true;
+        config.g_CSFDisable_Mi8_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_CDF_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_Animals = true;
+        config.g_CSFDisable_Wreck_UH1Y_Animals = true;
+        config.g_CSFDisable_Wreck_C130J_Animals = true;
+        config.g_CSFDisable_Wreck_C130_Camo_Animals = true;
+
+        config.g_CSFDisable_UH1Y_Zombies = false;
+        config.g_CSFDisable_Mi8_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_CDF_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_Zombies = false;
+        config.g_CSFDisable_Wreck_UH1Y_Zombies = false;
+        config.g_CSFDisable_Wreck_C130J_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_Camo_Zombies = false;
+
+        config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("New Hope Trader1", 541.244629, 423.528442, 11138.811523, {"all"}));
+        config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("<Customizable Exclusion Loot Types>", 1, 0, 1, {"loot", "zombies", "animals"}));
+
+        if (!FileExist(configRoot))
+        {
+            Print("[CSF] - '" + configRoot + "' does not exist, creating...");
+            MakeDirectory(configRoot);
+        }
+        JsonFileLoader<CSFConfig>.JsonSaveFile(config_path, config);
+    }
+
+protected static void CreateDefaultLoot(out CSFLoot loot)
+    {
+        loot = new CSFLoot();
+
+        loot.g_CSFSpawnableLootList = new ref array<ref CrashSiteLoot>;
+
+        loot.g_CSFDisable_UH1Y_Loot = true;
+        loot.g_CSFDisable_Mi8_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_CDF_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_Loot = true;
+        loot.g_CSFDisable_Wreck_UH1Y_Loot = true;
+        loot.g_CSFDisable_Wreck_C130J_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_Camo_Loot = true;
+
+        loot.g_CSFLootMin = 0;
+        loot.g_CSFLootMax = 15;
+        loot.g_CSFLootLifetime = 2700;
+        loot.g_CSFLootRandomHealth = false;
+
+        loot.g_CSFLootMinDistFrom_UH1Y = 2;
+        loot.g_CSFLootMaxDistFrom_UH1Y = 25;
+        loot.g_CSFLootMinDistFrom_Mi8 = 2;
+        loot.g_CSFLootMaxDistFrom_Mi8 = 25;
+        loot.g_CSFLootMinDistFrom_C130 = 9;
+        loot.g_CSFLootMaxDistFrom_C130 = 35;
+
+        loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
+            "item_type",
             {
-                Print("[CSF] - '" + configRoot + "' does not exist, creating...");
-                MakeDirectory(configRoot);
-            }
-            JsonFileLoader<CSFLoot>.JsonSaveFile(loot_path, loot);
+                "attachment_type1",
+                "attachment_type2_battery_req",
+                "attachemnt_type2_battery_name"
+            },
+            "magazine_type",
+            "sight_type",
+            0,
+            5,
+            {
+                "Mi8",
+                "UH1Y",
+                "C130"
+             }));
+        loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
+            "M4A1",
+            {
+                "M4_Suppressor",
+                "M4_RISHndgrd",
+                "UniversalFlashlight",
+                "Battery9V"
+            },
+            "Mag_STANAG_60Rnd",
+            "M68Optic",
+            0,
+            5,
+            {
+                "none"
+            }));
+
+        if (!FileExist(configRoot))
+        {
+            Print("[CSF] - '" + configRoot + "' does not exist, creating...");
+            MakeDirectory(configRoot);
+        }
+        JsonFileLoader<CSFLoot>.JsonSaveFile(loot_path, loot);
     }
 }
