@@ -24,7 +24,7 @@ modded class Wreck_UH1Y
             Print("[CSF] Wreck_UH1Y - heli crash spawned at " + spawnPosition);
         }
 
-        // EXCLUSION CHECK
+        // SPAWNER EXCLUSION CHECK
         bool exclude_loot = false;
         bool exclude_zombies = false;
         bool exclude_animals = false;
@@ -41,7 +41,7 @@ modded class Wreck_UH1Y
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -52,7 +52,7 @@ modded class Wreck_UH1Y
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -97,7 +97,7 @@ modded class Wreck_UH1Y
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - Wreck_UH1Y - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -126,88 +126,43 @@ modded class Wreck_UH1Y
                 Print("[CSF] " + animalsAmount + " Wreck_UH1Y animals spawned.");
         }
 
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_UH1Y_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            bool rand_health = false;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int total_items_spawned = 0; total_items_spawned < lootAmount; total_items_spawned++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    total_items_spawned = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_UH1Y,
+                    csfLoot.g_CSFLootMaxDistFrom_UH1Y,
+                    total_items_spawned,
+                    "UH1Y",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-                    Print("[CSF] {DEBUG} Item Count: '" + item_count + "'");
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Skipping Items to spawn for");
-                        break;
-                    }
-                    else if (item_count > (lootAmount - total_items_spawned))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - total_items_spawned) + "'");
-                        item_count = (lootAmount - total_items_spawned);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = csfLoot.g_CSFLootRandomHealth;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} Spawn---Wreck_UH1Y---" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_UH1Y, csfLoot.g_CSFLootMaxDistFrom_UH1Y), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Attachments)
-                                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                            total_items_spawned++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' Wreck_UH1Y loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' Wreck_UH1Y loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -258,7 +213,7 @@ modded class Wreck_Mi8
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -269,7 +224,7 @@ modded class Wreck_Mi8
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -314,7 +269,7 @@ modded class Wreck_Mi8
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - Wreck_Mi8 - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - Wreck_Mi8 - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -343,89 +298,43 @@ modded class Wreck_Mi8
                 Print("[CSF] " + animalsAmount + " Wreck_Mi8 animals spawned.");
         }
 
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_Mi8_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int k = 0; k < lootAmount; k++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    k = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_Mi8,
+                    csfLoot.g_CSFLootMaxDistFrom_Mi8,
+                    total_items_spawned,
+                    "Mi8",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} 0 Items to spawn for" + item_to_spawn);
-                        break;
-                    }
-                    else if (item_count > (lootAmount - k))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - k) + "'");
-                        item_count = (lootAmount - k);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = true;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            else
-                            {
-                                rand_health = false;
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} -----------------" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Attachments)
-                                SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' Wreck_Mi8 loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' Wreck_Mi8 loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -472,7 +381,7 @@ modded class crashed_Wreck_C130J
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -483,7 +392,7 @@ modded class crashed_Wreck_C130J
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -528,7 +437,7 @@ modded class crashed_Wreck_C130J
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_C130J - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_C130J - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -557,88 +466,43 @@ modded class crashed_Wreck_C130J
                 Print("[CSF] " + animalsAmount + " crashed_Wreck_C130J animals spawned.");
         }
 
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_Wreck_C130J_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int k = 0; k < lootAmount; k++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    k = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_C130,
+                    csfLoot.g_CSFLootMaxDistFrom_C130,
+                    total_items_spawned,
+                    "C130",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} 0 Items to spawn for" + item_to_spawn);
-                        break;
-                    }
-                    else if (item_count > (lootAmount - k))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - k) + "'");
-                        item_count = (lootAmount - k);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = true;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            else
-                            {
-                                rand_health = false;
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} -----------------" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_C130, csfLoot.g_CSFLootMaxDistFrom_C130), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' crashed_Wreck_UH1Y loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' crashed_Wreck_C130J loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -688,7 +552,7 @@ modded class crashed_Wreck_C130_Camo
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -699,7 +563,7 @@ modded class crashed_Wreck_C130_Camo
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -744,7 +608,7 @@ modded class crashed_Wreck_C130_Camo
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_C130_Camo - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_C130_Camo - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -773,88 +637,43 @@ modded class crashed_Wreck_C130_Camo
                 Print("[CSF] " + animalsAmount + " crashed_Wreck_C130_Camo animals spawned.");
         }
 
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_Wreck_C130_Camo_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int k = 0; k < lootAmount; k++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    k = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_C130,
+                    csfLoot.g_CSFLootMaxDistFrom_C130,
+                    total_items_spawned,
+                    "C130",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} 0 Items to spawn for" + item_to_spawn);
-                        break;
-                    }
-                    else if (item_count > (lootAmount - k))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - k) + "'");
-                        item_count = (lootAmount - k);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = true;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            else
-                            {
-                                rand_health = false;
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} -----------------" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_C130, csfLoot.g_CSFLootMaxDistFrom_C130), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' crashed_Wreck_UH1Y loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' crashed_Wreck_C130_Camo loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -901,7 +720,7 @@ modded class crashed_Wreck_Mi8_CDF
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -912,7 +731,7 @@ modded class crashed_Wreck_Mi8_CDF
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -957,7 +776,7 @@ modded class crashed_Wreck_Mi8_CDF
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_Mi8_CDF - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_Mi8_CDF - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -985,89 +804,43 @@ modded class crashed_Wreck_Mi8_CDF
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + animalsAmount + " crashed_Wreck_Mi8_CDF animals spawned.");
         }
-
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_Wreck_Mi8_CDF_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int k = 0; k < lootAmount; k++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    k = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_Mi8,
+                    csfLoot.g_CSFLootMaxDistFrom_Mi8,
+                    total_items_spawned,
+                    "C130",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} 0 Items to spawn for" + item_to_spawn);
-                        break;
-                    }
-                    else if (item_count > (lootAmount - k))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - k) + "'");
-                        item_count = (lootAmount - k);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = true;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            else
-                            {
-                                rand_health = false;
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} -----------------" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' crashed_Wreck_UH1Y loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' crashed_Wreck_Mi8_CDF loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -1114,7 +887,7 @@ modded class crashed_Wreck_Mi8_RU
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -1125,7 +898,7 @@ modded class crashed_Wreck_Mi8_RU
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -1170,7 +943,7 @@ modded class crashed_Wreck_Mi8_RU
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_Mi8_RU - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_Mi8_RU - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -1198,89 +971,43 @@ modded class crashed_Wreck_Mi8_RU
             if (!csfConfig.g_CSFDisableLogMessages)
                 Print("[CSF] " + animalsAmount + " crashed_Wreck_Mi8_RU animals spawned.");
         }
-
-        // Loot
+        // LOOT
+        // Begin Spawners
         if (!csfLoot.g_CSFDisable_Wreck_Mi8_RU_Loot && !exclude_loot)
         {
-            if (!csfConfig.g_CSFDisableLogMessages)
-            {
-                Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-            }
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
+            bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int k = 0; k < lootAmount; k++)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'");
-                    k = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_Mi8,
+                    csfLoot.g_CSFLootMaxDistFrom_Mi8,
+                    total_items_spawned,
+                    "Mi8",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
                 else
-                {
-                    item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-
-                    // Check if No items needed to spawn, then exit statement
-                    if (item_count == 0)
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} 0 Items to spawn for" + item_to_spawn);
-                        break;
-                    }
-                    else if (item_count > (lootAmount - k))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - k) + "'");
-                        item_count = (lootAmount - k);
-                    }
-                    else
-                    {
-                        Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                        for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                        {
-                            // Checking if random health requested
-                            if (csfLoot.g_CSFLootRandomHealth)
-                            {
-                                rand_health = true;
-                                if (!csfConfig.g_CSFDisableLogMessages)
-                                    Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                            }
-                            else
-                            {
-                                rand_health = false;
-                            }
-                            // Begin spawning items+attachments
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] {DEBUG} -----------------" + item_to_spawn + "-----------------");
-                            ItemBase itemEnt = SpawnItem(item_to_spawn, GetRandomSpawnPosition(spawnPosition, csfLoot.g_CSFLootMinDistFrom_Mi8, csfLoot.g_CSFLootMaxDistFrom_Mi8), csfLoot.g_CSFLootLifetime, rand_health, csfConfig.g_CSFDisableLogMessages);
-                            SpawnAttachments(itemEnt, g_CSFSpawnableLootList.Attachments, false, csfConfig.g_CSFDisableLogMessages);
-                            if (g_CSFSpawnableLootList.Sight)
-                                SpawnSight(itemEnt, g_CSFSpawnableLootList.Sight, false, csfConfig.g_CSFDisableLogMessages);
-                            debug_items++;
-                        }
-                    }
-                    item_index++;
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' crashed_Wreck_UH1Y loot spawned.");
-                Print("[CSF] Adjusted Result: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' crashed_Wreck_Mi8_RU loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
@@ -1326,7 +1053,7 @@ modded class crashed_Wreck_UH1Y
                 ref CrashSiteExclude g_CSFExcludedCrashSites = csfConfig.g_CSFExcludedCrashSites.Get(exclude_me_index);
                 if (!csfConfig.g_CSFDisableLogMessages)
                 {
-                    Print("[CSF] -----------------Name of Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
+                    Print("[CSF] --- Excluded Site to Check: '" + g_CSFExcludedCrashSites.Label + "'-----------------");
                 }
                 vector exclusion_pos;
                 ref TStringArray exclude_spawn_types;
@@ -1337,7 +1064,7 @@ modded class crashed_Wreck_UH1Y
                 if (exclusion_pos == spawnPosition)
                 {
                     if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] - Crash Site Exclusion MATCH!");
+                        Print("[CSF] - Exclusion MATCH!");
 
                     for (int excluded_spawns_index = 0; excluded_spawns_index < exclude_spawn_types.Count(); excluded_spawns_index++)
                     {
@@ -1382,7 +1109,7 @@ modded class crashed_Wreck_UH1Y
                     }
                     if (!csfConfig.g_CSFDisableLogMessages)
                     {
-                        Print("[CSF] - crashed_Wreck_UH1Y - Name of Excluded Site Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
+                        Print("[CSF] - crashed_Wreck_UH1Y - List of Excluded Setup: '" + g_CSFExcludedCrashSites.Label + " - Exclude ~ Animals: " + exclude_animals + ", Loot: " + exclude_loot + ", Zombies: " + exclude_zombies);
                     }
                 }
             }
@@ -1415,96 +1142,39 @@ modded class crashed_Wreck_UH1Y
         // Begin Spawners
         if (!csfLoot.g_CSFDisable_Wreck_UH1Y_Loot && !exclude_loot)
         {
-
             // TODO: Find how to grab max health of item to spawn
-            bool rand_health = csfLoot.g_CSFLootRandomHealth;
             int random_selected_index = 0;
             int item_min;
             int item_max;
             int item_count;
             int item_index = 0;
             int debug_items = 0;
-            string item_to_spawn;
+            int adjusted_items_spawned = 0;
             bool include_loot = true;
             // Spawn system iterator
-            int lootAmount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax);
-            for (int total_items_spawned = 0; total_items_spawned < lootAmount;)
+            int total_loot_amount = Math.RandomInt(csfLoot.g_CSFLootMin, csfLoot.g_CSFLootMax + 1);
+            for (int total_items_spawned = 0; total_items_spawned < total_loot_amount; item_index++)
             {
-                ref CrashSiteLoot g_CSFSpawnableLootList = csfLoot.g_CSFSpawnableLootList.Get(item_index);
-                // Check if we have anything to spawn
-                if (!g_CSFSpawnableLootList)
-                {
-                    Print("[CSF] WARNING : failed to find valid item before reaching end of 'lootAmount'!");
-                    total_items_spawned = lootAmount;
+                adjusted_items_spawned = ValidateItemsToSpawn(
+                    csfLoot.g_CSFSpawnableLootList.Get(item_index),
+                    total_loot_amount,
+                    csfLoot.g_CSFLootRandomHealth,
+                    csfLoot.g_CSFLootLifetime,
+                    spawnPosition,
+                    csfLoot.g_CSFLootMinDistFrom_UH1Y,
+                    csfLoot.g_CSFLootMaxDistFrom_UH1Y,
+                    total_items_spawned,
+                    "UH1Y",
+                    csfConfig.g_CSFDisableLogMessages);
+                if (adjusted_items_spawned == -1)
                     break;
-                }
-                if (!g_CSFSpawnableLootList.IncludedWrecks)
-                {
-                    if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] {DEBUG} No Wrecks found, defaulting to all");
-                }
                 else
-                {
-                    // Is loot included?
-                    if (!IncludeLoot(g_CSFSpawnableLootList.IncludedWrecks, "UH1Y"))
-                        include_loot = false;
-                    else
-                        include_loot = true;
-                }
-
-                // TODO: Check if item is valid
-                // HERE
-                // Spawn Item count based on min-max
-
-                item_to_spawn = g_CSFSpawnableLootList.ItemName;
-                // Check if No items needed to spawn, then exit statement
-                if (!include_loot)
-                {
-                    if (!csfConfig.g_CSFDisableLogMessages)
-                        Print("[CSF] {DEBUG} Skipping Items to spawned for" + item_to_spawn);
-                    item_index++;
-                    Print("[CSF] Next item check at index: " + item_index);
-                }
-                else
-                {
-                    if (!csfConfig.g_CSFDisableLogMessages)
-                    {
-                        Print("[CSF] -----------------ALLOW ITEMS TO SPAWN!!-----------------");
-                    }
-                    item_count = Math.RandomInt(g_CSFSpawnableLootList.MinCount, g_CSFSpawnableLootList.MaxCount);
-                    if (item_count > (lootAmount - total_items_spawned))
-                    {
-                        if (!csfConfig.g_CSFDisableLogMessages)
-                            Print("[CSF] {DEBUG} Too many item count requested, requesting diff instead: '" + (lootAmount - total_items_spawned) + "'");
-                        item_count = (lootAmount - total_items_spawned);
-                    }
-                    Print("[CSF] {DEBUG} ITEM '" + item_to_spawn + "' COUNT IS '" + item_count + "'");
-                    for (int item_dupe = 0; item_dupe < item_count; item_dupe++)
-                    {
-                        // Checking if random health requested
-                        if (csfLoot.g_CSFLootRandomHealth)
-                        {
-                            rand_health = csfLoot.g_CSFLootRandomHealth;
-                            if (!csfConfig.g_CSFDisableLogMessages)
-                                Print("[CSF] RANDOM HEALTH! : '" + rand_health + "'");
-                        }
-                        else
-                        {
-                            rand_health = false;
-                        }
-                        //SpawnItem in List
-                        SpawnItemsInList(g_CSFSpawnableLootList, spawnPosition, csfLoot.g_CSFLootMinDistFrom_UH1Y, csfLoot.g_CSFLootMaxDistFrom_UH1Y, csfLoot.g_CSFLootLifetime, csfLoot.g_CSFLootRandomHealth, !csfConfig.g_CSFDisableLogMessages);
-                        debug_items++;
-                        total_items_spawned++;
-                    }
-                    item_index++;
-                    Print("[CSF] Next item check at index: " + item_index);
-                }
+                    total_items_spawned = adjusted_items_spawned;
             }
             if (!csfConfig.g_CSFDisableLogMessages)
             {
-                Print("[CSF] Requested '" + lootAmount + "' crashed_Wreck_UH1Y loot spawned.");
-                Print("[CSF] Actual Spawn Count: '" + debug_items + "'");
+                Print("[CSF] Requested '" + total_loot_amount + "' crashed_Wreck_UH1Y loot spawned.");
+                Print("[CSF] Actual Spawn Count: '" + total_items_spawned + "'");
             }
         }
     }
