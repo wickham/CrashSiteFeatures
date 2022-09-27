@@ -5,7 +5,7 @@ class CfgPatches
         requiredAddons[] =
             {
                 "DZ_Data",
-                "CJ_Structures_Wrecks"};
+                "CJ187_CrashSites"};
         requiredVersion = 0.1;
         units[] = {};
         weapons[] = {};

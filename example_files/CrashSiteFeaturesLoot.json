@@ -1,52 +1,97 @@
 {
-    "g_CSFLootMin": 0,
-    "g_CSFLootMax": 8,
-    "g_CSFLootLifetime": 2700,
-    "g_CSFLootRandomHealth": 0,
+    "g_CSFLootMin": 4,
+    "g_CSFLootMax": 15,
+    "g_CSFLootRandomHealth": 1,
+    "g_CSFLootLifetime": 3600,
     "g_CSFLootMinDistFrom_UH1Y": 2,
-    "g_CSFLootMaxDistFrom_UH1Y": 25,
+    "g_CSFLootMaxDistFrom_UH1Y": 35,
     "g_CSFLootMinDistFrom_Mi8": 2,
-    "g_CSFLootMaxDistFrom_Mi8": 25,
+    "g_CSFLootMaxDistFrom_Mi8": 35,
     "g_CSFLootMinDistFrom_C130": 9,
-    "g_CSFLootMaxDistFrom_C130": 35,
+    "g_CSFLootMaxDistFrom_C130": 45,
+    "g_CSFDisable_Mi8_Loot": 1,
+    "g_CSFDisable_Wreck_Mi8_CDF_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_CDF_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_1_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_1_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_2_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_2_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_3_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_3_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_4_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_RU_4_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Winter_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Winter_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Civ_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Civ_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_UN_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_UN_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Desert_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Desert_2_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Tropic_1_Loot": 0,
+    "g_CSFDisable_Wreck_Mi8_Tropic_2_Loot": 0,
     "g_CSFDisable_UH1Y_Loot": 0,
-    "g_CSFDisable_Mi8_Loot": 0,
-    "g_CSFDisable_Wreck_Mi8_CDF_Loot": 0,
-    "g_CSFDisable_Wreck_Mi8_RU_Loot": 0,
-    "g_CSFDisable_Wreck_UH1Y_Loot": 0,
-    "g_CSFDisable_Wreck_C130J_Loot": 0,
-    "g_CSFDisable_Wreck_C130_Camo_Loot": 0,
-    "g_CSFSpawnableLootList": [
-        {
-            "ItemName": "M4A1",
-            "Attachments": [
-                "M4_Suppressor",
-                "M4_RISHndgrd",
-                "M4_CQBBttstck",
-                "UniversalLight"
-            ],
-            "Magazine": "Mag_STANAG_60Rnd",
+    "g_CSFDisable_Wreck_UH1Y_USMC_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_USMC_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_USMC_2_Loot": 0,
+    "g_CSFDisable_Wreck_C130_USAF_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_USAF_2_Loot": 0,
+    "g_CSFDisable_Wreck_C130_Camo_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_Camo_2_Loot": 0,
+    "g_CSFDisable_Wreck_C130_Camo_3_Loot": 0,
+    "g_CSFDisable_Wreck_C130_AAF_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_AAF_2_Loot": 0,
+    "g_CSFDisable_Wreck_C130_CIV_1_Loot": 0,
+    "g_CSFDisable_Wreck_C130_CIV_2_Loot": 0,
+    "g_CSFSpawnableLootList": [{
+            "ItemName": "TacticalBaconCan",
             "MinCount": 0,
-            "MaxCount": 5,
+            "MaxCount": 4,
             "IncludedWrecks": [
-                "Mi8",
-                "UH1Y",
-                "C130"
+                "UH1Y_USMC_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2",
+                "C130_USMC_1",
+                "C130_USMC_2",
+                "C130_USAF_1",
+                "C130_USAF_2",
+                "C130_Camo_1",
+                "C130_Camo_2",
+                "C130_Camo_3",
+                "C130_AAF_1",
+                "C130_AAF_2"
             ]
         },
         {
-            "ItemName": "M4A1",
-            "Attachments": [
-                "M4_Suppressor",
-                "M4_RISHndgrd",
-                "M4_MPBttstck"
-            ],
-            "Magazine": "Mag_STANAG_30Rnd",
-            "Sight": "M68Optic",
+            "ItemName": "PeachesCan",
             "MinCount": 0,
-            "MaxCount": 5,
+            "MaxCount": 4,
             "IncludedWrecks": [
-                "Mi8"
+                "all"
+            ]
+        },
+        {
+            "ItemName": "Honey",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "BakedBeansCan",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
             ]
         },
         {
@@ -55,7 +100,357 @@
                 "Battery9V"
             ],
             "MinCount": 0,
-            "MaxCount": 5
+            "MaxCount": 4,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "M4A1",
+            "Attachments": [
+                "M4_Suppressor",
+                "M4_RISHndgrd",
+                "UniversalLight",
+                "M4_MPBttstck"
+            ],
+            "Magazine": "Mag_STANAGCoupled_30Rnd",
+            "Sight": "AD_ACOG_RMR",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2",
+                "C130_USMC_1",
+                "C130_USMC_2",
+                "C130_USAF_1",
+                "C130_USAF_2",
+                "C130_Camo_1",
+                "C130_Camo_2",
+                "C130_Camo_3",
+                "C130_AAF_1",
+                "C130_AAF_2"
+            ]
+        },
+        {
+            "ItemName": "AKM",
+            "Attachments": [
+                "AK_Suppressor",
+                "AK_WoodHndgrd",
+                "AK_WoodBttstck"
+            ],
+            "Magazine": "Mag_AKM_30Rnd",
+            "Sight": "AD_OKP7_B13",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2",
+                "C130_Camo_1",
+                "C130_Camo_2",
+                "C130_Camo_3"
+            ]
+        },
+        {
+            "ItemName": "FOX_FN57",
+            "Attachments": [
+                "FOX_APS_Suppressor",
+                "TLRLight",
+                "Battery9V"
+            ],
+            "Magazine": "FOX_Mag_FN57_30Rnd",
+            "Sight": "AD_RMR",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "Mi8"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_blade1",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "57x28_AmmoBox_25rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "57x28AP_AmmoBox_25rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "9x18_AmmoBox_35rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "AmmoBox_556x45Tracer_20Rnd",
+            "MinCount": 0,
+            "MaxCount": 4,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "AmmoBox_556x45_20Rnd",
+            "MinCount": 0,
+            "MaxCount": 4,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "AACBLK_AmmoBox_20rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "93x64_AmmoBox_20rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "792x57FOX_AmmoBox_20rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "9x21FOX_AmmoBox_25rnd",
+            "MinCount": 0,
+            "MaxCount": 2,
+            "IncludedWrecks": [
+                "all"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_blade2",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_blade3",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_blade4",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_blade5",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_bladem1",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
+        },
+        {
+            "ItemName": "RFlittle_bird_bladem3",
+            "MinCount": 0,
+            "MaxCount": 1,
+            "IncludedWrecks": [
+                "UH1Y_USMC_1",
+                "Mi8_RU_1_1",
+                "Mi8_RU_2_1",
+                "Mi8_RU_3_1",
+                "Mi8_RU_4_1",
+                "Mi8_CDF_1",
+                "Mi8_Winter_1",
+                "Mi8_Civ_1",
+                "Mi8_UN_1",
+                "Mi8_Desert_1",
+                "Mi8_Tropic_1",
+                "Mi8_RU_1_2",
+                "Mi8_RU_2_2",
+                "Mi8_RU_3_2",
+                "Mi8_RU_4_2",
+                "Mi8_CDF_2",
+                "Mi8_Winter_2",
+                "Mi8_Civ_2",
+                "Mi8_UN_2",
+                "Mi8_Desert_2",
+                "Mi8_Tropic_2"
+            ]
         }
     ]
 }

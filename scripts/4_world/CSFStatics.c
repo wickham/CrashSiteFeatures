@@ -59,6 +59,7 @@ static void SpawnSight(ItemBase item, string sight, bool rand_health, bool disab
         if (!disable_logging)
             Print("[CSF] {DEBUG} [SpawnSight] No SIGHT requested... NOT YET IMPLEMENTED");
         return;
+        break;
 
     default:
         item.GetInventory().CreateAttachment(sight).GetInventory().CreateAttachment("Battery9V");
@@ -74,7 +75,8 @@ static vector GetRandomSpawnPosition(vector centerpoint, int minDistFromHeli, in
     float distance = Math.RandomFloat(minDistFromHeli, maxDistFromHeli);
     vector randomSpawnPosition = centerpoint + Vector(Math.Cos(height) * distance, 0.0, Math.Sin(height) * distance);
 
-    randomSpawnPosition[1] = GetGame().SurfaceY(randomSpawnPosition[0], randomSpawnPosition[2]) + 0.5;
+    randomSpawnPosition[1] = GetGame().SurfaceY(randomSpawnPosition[0], randomSpawnPosition[2]);
+    // randomSpawnPosition[1] = GetGame().SurfaceY(randomSpawnPosition[0], randomSpawnPosition[2]) + 0.5;
 
     return randomSpawnPosition;
 }
@@ -101,7 +103,9 @@ static void SpawnItemsInList(
     */
 
     if (is_logging_disabled)
+    {
         Print("[CSF] {DEBUG} [SpawnListOfItems] ---" + loot_list.ItemName + "---");
+    }
     ItemBase itemEnt = SpawnItem(loot_list.ItemName, GetRandomSpawnPosition(spawn_position, min_dist, max_dist), lifetime, rand_health, is_logging_disabled);
     if (loot_list.Attachments)
     {
@@ -222,7 +226,7 @@ static int ValidateItemsToSpawn(
         }
         else
             rand_health = false;
-        //SpawnItem in List
+        // SpawnItem in List
         SpawnItemsInList(g_CSFSpawnableLootList, spawnPosition, min_dist, max_dist, loot_lifetime, rand_health, disable_logging);
         total_items_spawned++;
     }
@@ -264,8 +268,6 @@ static TStringArray BatteryNeededTypes()
         "PSO1Optic",
         "PistolOptic",
         "ReflexOptic",
-        "TLRLight",
-        "Flashlight",
         // Advanced Scopes
         "AD_ACOG_RMR",
         "AD_ACOG_RMR_MosinMount",
@@ -358,6 +360,18 @@ static TStringArray SightTypes()
         "AD_SpecterDR",
         "AD_SpecterDR_MosinMount",
         "AD_SpecterDR_B13",
+        "AD_LeupoldMk4",
+        "AD_LeupoldMk4_B13",
+        "AD_LeupoldMk4_MosinMount",
+        "AD_G33",
+        "AD_G33_B13",
+        "AD_G33_MosinMount",
+        "AD_XPS34",
+        "AD_XPS34_B13",
+        "AD_XPS34_MosinMount",
+        "AD_XPS34_HHS",
+        "AD_XPS34_HHS_B13",
+        "AD_XPS34_HHS_MosinMount",
         // ACS Lvoa Scopes
         "ASC_LVOAC_MilStdScope",
         "ASC_LVOAC_MilStdScope_OliveGreen",

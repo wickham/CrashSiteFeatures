@@ -54,21 +54,85 @@ class CSFConfig
     int g_CSFZombieMinDistFromHeli;
     int g_CSFZombieMaxDistFromHeli;
 
+
+
+
     bool g_CSFDisable_UH1Y_Animals;
+    bool g_CSFDisable_Wreck_UH1Y_USMC_1_Animals;
+
     bool g_CSFDisable_Mi8_Animals;
-    bool g_CSFDisable_Wreck_Mi8_CDF_Animals;
-    bool g_CSFDisable_Wreck_Mi8_RU_Animals;
-    bool g_CSFDisable_Wreck_UH1Y_Animals;
-    bool g_CSFDisable_Wreck_C130J_Animals;
-    bool g_CSFDisable_Wreck_C130_Camo_Animals;
+    bool g_CSFDisable_Wreck_Mi8_CDF_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_CDF_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Winter_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Winter_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Civ_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Civ_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_UN_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_UN_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Desert_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Desert_2_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_1_Animals;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_2_Animals;
+
+    bool g_CSFDisable_Wreck_C130_USMC_1_Animals;
+    bool g_CSFDisable_Wreck_C130_USMC_2_Animals;
+    bool g_CSFDisable_Wreck_C130_USAF_1_Animals;
+    bool g_CSFDisable_Wreck_C130_USAF_2_Animals;
+    bool g_CSFDisable_Wreck_C130_Camo_1_Animals;
+    bool g_CSFDisable_Wreck_C130_Camo_2_Animals;
+    bool g_CSFDisable_Wreck_C130_Camo_3_Animals;
+    bool g_CSFDisable_Wreck_C130_AAF_1_Animals;
+    bool g_CSFDisable_Wreck_C130_AAF_2_Animals;
+    bool g_CSFDisable_Wreck_C130_CIV_1_Animals;
+    bool g_CSFDisable_Wreck_C130_CIV_2_Animals;
+
+
+
+
+    bool g_CSFDisable_Mi8_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_CDF_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_CDF_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Winter_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Winter_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Civ_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Civ_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_UN_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_UN_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Desert_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Desert_2_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_1_Zombies;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_2_Zombies;
 
     bool g_CSFDisable_UH1Y_Zombies;
-    bool g_CSFDisable_Mi8_Zombies;
-    bool g_CSFDisable_Wreck_Mi8_CDF_Zombies;
-    bool g_CSFDisable_Wreck_Mi8_RU_Zombies;
-    bool g_CSFDisable_Wreck_UH1Y_Zombies;
-    bool g_CSFDisable_Wreck_C130J_Zombies;
-    bool g_CSFDisable_Wreck_C130_Camo_Zombies;
+    bool g_CSFDisable_Wreck_UH1Y_USMC_1_Zombies;
+
+    bool g_CSFDisable_Wreck_C130_USMC_1_Zombies;
+    bool g_CSFDisable_Wreck_C130_USMC_2_Zombies;
+    bool g_CSFDisable_Wreck_C130_USAF_1_Zombies;
+    bool g_CSFDisable_Wreck_C130_USAF_2_Zombies;
+    bool g_CSFDisable_Wreck_C130_Camo_1_Zombies;
+    bool g_CSFDisable_Wreck_C130_Camo_2_Zombies;
+    bool g_CSFDisable_Wreck_C130_Camo_3_Zombies;
+    bool g_CSFDisable_Wreck_C130_AAF_1_Zombies;
+    bool g_CSFDisable_Wreck_C130_AAF_2_Zombies;
+    bool g_CSFDisable_Wreck_C130_CIV_1_Zombies;
+    bool g_CSFDisable_Wreck_C130_CIV_2_Zombies;
 
     ref array<ref CrashSiteExclude> g_CSFExcludedCrashSites;
 }
@@ -88,13 +152,43 @@ class CSFLoot
     int g_CSFLootMinDistFrom_C130;
     int g_CSFLootMaxDistFrom_C130;
 
-    bool g_CSFDisable_UH1Y_Loot;
+
     bool g_CSFDisable_Mi8_Loot;
-    bool g_CSFDisable_Wreck_Mi8_CDF_Loot;
-    bool g_CSFDisable_Wreck_Mi8_RU_Loot;
-    bool g_CSFDisable_Wreck_UH1Y_Loot;
-    bool g_CSFDisable_Wreck_C130J_Loot;
-    bool g_CSFDisable_Wreck_C130_Camo_Loot;
+    bool g_CSFDisable_Wreck_Mi8_CDF_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_CDF_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_1_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_2_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_3_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_RU_4_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Winter_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Winter_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Civ_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Civ_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_UN_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_UN_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Desert_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Desert_2_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_1_Loot;
+    bool g_CSFDisable_Wreck_Mi8_Tropic_2_Loot;
+
+    bool g_CSFDisable_UH1Y_Loot;
+    bool g_CSFDisable_Wreck_UH1Y_USMC_1_Loot;
+
+    bool g_CSFDisable_Wreck_C130_USMC_1_Loot;
+    bool g_CSFDisable_Wreck_C130_USMC_2_Loot;
+    bool g_CSFDisable_Wreck_C130_USAF_1_Loot;
+    bool g_CSFDisable_Wreck_C130_USAF_2_Loot;
+    bool g_CSFDisable_Wreck_C130_Camo_1_Loot;
+    bool g_CSFDisable_Wreck_C130_Camo_2_Loot;
+    bool g_CSFDisable_Wreck_C130_Camo_3_Loot;
+    bool g_CSFDisable_Wreck_C130_AAF_1_Loot;
+    bool g_CSFDisable_Wreck_C130_AAF_2_Loot;
+    bool g_CSFDisable_Wreck_C130_CIV_1_Loot;
+    bool g_CSFDisable_Wreck_C130_CIV_2_Loot;
 
     ref array<ref CrashSiteLoot> g_CSFSpawnableLootList;
 }
@@ -161,7 +255,7 @@ protected static void CreateDefaultConfig(out CSFConfig config)
         config = new CSFConfig();
         config.g_CSFExcludedCrashSites = new ref array<ref CrashSiteExclude>;
 
-        config.g_CSFDisableLogMessages = false;
+        config.g_CSFDisableLogMessages = true;
         config.g_CSFZombieAndAnimalLifetime = 2700;
 
         config.g_CSFAnimalsMin = 0;
@@ -174,21 +268,83 @@ protected static void CreateDefaultConfig(out CSFConfig config)
         config.g_CSFZombieMinDistFromHeli = 5;
         config.g_CSFZombieMaxDistFromHeli = 45;
 
-        config.g_CSFDisable_UH1Y_Animals = true;
+
+
+
         config.g_CSFDisable_Mi8_Animals = true;
-        config.g_CSFDisable_Wreck_Mi8_CDF_Animals = true;
-        config.g_CSFDisable_Wreck_Mi8_RU_Animals = true;
-        config.g_CSFDisable_Wreck_UH1Y_Animals = true;
-        config.g_CSFDisable_Wreck_C130J_Animals = true;
-        config.g_CSFDisable_Wreck_C130_Camo_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_CDF_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_CDF_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_1_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_1_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_2_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_2_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_3_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_3_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_4_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_RU_4_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Winter_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Winter_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Civ_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Civ_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_UN_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_UN_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Desert_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Desert_2_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Tropic_1_Animals = true;
+        config.g_CSFDisable_Wreck_Mi8_Tropic_2_Animals = true;
+
+        config.g_CSFDisable_UH1Y_Animals = true;
+        config.g_CSFDisable_Wreck_UH1Y_USMC_1_Animals = true;
+
+        config.g_CSFDisable_Wreck_C130_USMC_1_Animals = true;
+        config.g_CSFDisable_Wreck_C130_USMC_2_Animals = true;
+        config.g_CSFDisable_Wreck_C130_USAF_1_Animals = true;
+        config.g_CSFDisable_Wreck_C130_USAF_2_Animals = true;
+        config.g_CSFDisable_Wreck_C130_Camo_1_Animals = true;
+        config.g_CSFDisable_Wreck_C130_Camo_2_Animals = true;
+        config.g_CSFDisable_Wreck_C130_Camo_3_Animals = true;
+        config.g_CSFDisable_Wreck_C130_AAF_1_Animals = true;
+        config.g_CSFDisable_Wreck_C130_AAF_2_Animals = true;
+        config.g_CSFDisable_Wreck_C130_CIV_1_Animals = true;
+        config.g_CSFDisable_Wreck_C130_CIV_2_Animals = true;
+
+
+        config.g_CSFDisable_Mi8_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_CDF_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_CDF_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_1_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_1_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_2_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_2_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_3_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_3_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_4_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_RU_4_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Winter_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Winter_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Civ_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Civ_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_UN_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_UN_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Desert_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Desert_2_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Tropic_1_Zombies = false;
+        config.g_CSFDisable_Wreck_Mi8_Tropic_2_Zombies = false;
 
         config.g_CSFDisable_UH1Y_Zombies = false;
-        config.g_CSFDisable_Mi8_Zombies = false;
-        config.g_CSFDisable_Wreck_Mi8_CDF_Zombies = false;
-        config.g_CSFDisable_Wreck_Mi8_RU_Zombies = false;
-        config.g_CSFDisable_Wreck_UH1Y_Zombies = false;
-        config.g_CSFDisable_Wreck_C130J_Zombies = false;
-        config.g_CSFDisable_Wreck_C130_Camo_Zombies = false;
+        config.g_CSFDisable_Wreck_UH1Y_USMC_1_Zombies = false;
+
+        config.g_CSFDisable_Wreck_C130_USMC_1_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_USMC_2_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_USAF_1_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_USAF_2_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_Camo_1_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_Camo_2_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_Camo_3_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_AAF_1_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_AAF_2_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_CIV_1_Zombies = false;
+        config.g_CSFDisable_Wreck_C130_CIV_2_Zombies = false;
 
         config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("New Hope Trader1", 541.244629, 423.528442, 11138.811523, {"all"}));
         config.g_CSFExcludedCrashSites.Insert(new ref CrashSiteExclude("<Customizable Exclusion Loot Types>", 1, 0, 1, {"loot", "zombies", "animals"}));
@@ -207,14 +363,6 @@ protected static void CreateDefaultLoot(out CSFLoot loot)
 
         loot.g_CSFSpawnableLootList = new ref array<ref CrashSiteLoot>;
 
-        loot.g_CSFDisable_UH1Y_Loot = true;
-        loot.g_CSFDisable_Mi8_Loot = true;
-        loot.g_CSFDisable_Wreck_Mi8_CDF_Loot = true;
-        loot.g_CSFDisable_Wreck_Mi8_RU_Loot = true;
-        loot.g_CSFDisable_Wreck_UH1Y_Loot = true;
-        loot.g_CSFDisable_Wreck_C130J_Loot = true;
-        loot.g_CSFDisable_Wreck_C130_Camo_Loot = true;
-
         loot.g_CSFLootMin = 0;
         loot.g_CSFLootMax = 15;
         loot.g_CSFLootLifetime = 2700;
@@ -226,6 +374,51 @@ protected static void CreateDefaultLoot(out CSFLoot loot)
         loot.g_CSFLootMaxDistFrom_Mi8 = 25;
         loot.g_CSFLootMinDistFrom_C130 = 9;
         loot.g_CSFLootMaxDistFrom_C130 = 35;
+
+
+
+
+        loot.g_CSFDisable_Mi8_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_CDF_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_CDF_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_1_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_1_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_2_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_2_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_3_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_3_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_4_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_RU_4_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Winter_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Winter_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Civ_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Civ_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_UN_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_UN_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Desert_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Desert_2_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Tropic_1_Loot = true;
+        loot.g_CSFDisable_Wreck_Mi8_Tropic_2_Loot = true;
+
+
+        loot.g_CSFDisable_UH1Y_Loot = true;
+        loot.g_CSFDisable_Wreck_UH1Y_USMC_1_Loot = true;
+
+
+        loot.g_CSFDisable_Wreck_C130_USMC_1_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_USMC_2_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_USAF_1_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_USAF_2_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_Camo_1_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_Camo_2_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_Camo_3_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_AAF_1_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_AAF_2_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_CIV_1_Loot = true;
+        loot.g_CSFDisable_Wreck_C130_CIV_2_Loot = true;
+
+
+
 
         loot.g_CSFSpawnableLootList.Insert(new ref CrashSiteLoot(
             "item_type",
